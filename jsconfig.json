@@ -1,0 +1,16 @@
+{
+  "compilerOptions": {
+    /* Strictness */
+    "checkJs": false, // Disable type checking in JS files
+
+    "plugins": [{ "name": "next" }],
+
+    /* Path Aliases */
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./src/*"]
+    }
+  },
+  "include": [".eslintrc.json", "**/*.js", "**/*.jsx", "**/*.cjs"],
+  "exclude": ["node_modules"]
+}

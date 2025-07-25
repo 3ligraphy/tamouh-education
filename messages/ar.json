@@ -1,0 +1,1580 @@
+{
+  "Navbar": {
+    "Student Dashboard": "لوحة تحكم الطالب",
+    "home": "الصفحة الرئيسية",
+    "courses": "دورات",
+    "credit": "رصيد",
+    "Settings": "الاعدادات",
+    "about": "من نحن؟",
+    "login": "تسجيل الدخول",
+    "signup": "إنشاء حساب",
+    "Signed in as": "تم تسجيل الدخول باسم",
+    "Profile": "الملف الشخصي",
+    "Log Out": "تسجيل الخروج",
+    "Welcome": "مرحباً",
+    "Guest": "زائر",
+    "Facebook": "فيسبوك",
+    "WhatsApp": "واتساب",
+    "logo": "شعار طموح للتعليم",
+    "My Dashboard": "لوحة التحكم",
+    "Wallet Balance": "رصيد المحفظة",
+    "Credits": "رصيد"
+  },
+  "Hero": {
+    "title": "ان لم تكن طموحاً على مستقبلك ، فلن تصل الى ما تريد ، اسعَ في سعي لله ساعٍ ، إلا بلغ.",
+    "subtitle": "انضم إلى منصتنا للتعلم من المدربين المتخصصين",
+    "author": "أ.بدريه الخالدي",
+    "specialistsCount": "أكثر من {count} متخصص",
+    "exploreButton": "اكتشاف المزيد"
+  },
+  "PopularCourses": {
+    "title": "دورات شائعة",
+    "viewAll": "عرض المزيد",
+    "description": "قسم يحتوي على أكثر الدورات طلباً أو تقييماً من المستخدمين"
+  },
+  "RecentCourses": {
+    "title": "دورات مضافة حديثاً",
+    "viewAll": "عرض المزيد",
+    "description": "قائمة تحتوي على أحدث الدورات التي تم إضافتها للمنصة"
+  },
+  "CourseCard": {
+    "progress": "التقدم",
+    "favorite": "المفضلة",
+    "course_tabs": {
+      "my_courses": "دوراتي",
+      "assigned_courses": "الدورات المسندة",
+      "draft_courses": "المسودات"
+    },
+    "added_to_favorites": "تمت إضافة الدورة إلى قائمة المفضلة بنجاح",
+    "removed_from_favorites": "تمت إزالة الدورة إلى قائمة المفضلة بنجاح",
+    "imageAlt": "{title}",
+    "rating": "{rating}",
+    "studentCount": "{count} مشترك",
+    "details": "تفاصيل الدورة",
+    "draft": "مسودة",
+    "publish": "نشر الدورة",
+    "unpublish": "تحويل إلى مسودة",
+    "edit": "تعديل الدورة",
+    "delete": "حذف الدورة",
+    "confirm_delete": "هل أنت متأكد من حذف هذه الدورة؟ لا يمكن التراجع عن هذا الإجراء.",
+    "course_updated": "تم تحديث الدورة بنجاح",
+    "course_deleted": "تم حذف الدورة بنجاح",
+    "unknown_user": "مستخدم غير معروف",
+    "last_updated": "آخر تحديث بواسطة {updatedBy} في {date} الساعة {time}",
+    "priceLabel": "سعر الدورة",
+    "credits": "رصيد",
+    "courses": {
+      "csharp": {
+        "title": "أساسيات برمجة #C",
+        "description": "تعلم برمجة #C مع أمثلة عملية"
+      },
+      "cpp": {
+        "title": "أساسيات برمجة ++C",
+        "description": "تعلم برمجة ++C مع أمثلة عملية"
+      },
+      "java": {
+        "title": "برمجة جافا للمبتدئين",
+        "description": "تعلم برمجة جافا مع أمثلة عملية"
+      },
+      "python": {
+        "title": "أساسيات برمجة بايثون",
+        "description": "تعلم برمجة بايثون مع أمثلة عملية"
+      }
+    }
+  },
+  "Specialists": {
+    "title": "متخصصين مشهورين",
+    "computerScientist": "متخصص في علوم الحاسب"
+  },
+  "Testimonials": {
+    "subtitle": "آراءكم تهمنا",
+    "title": "ماذا يقولون عنا؟",
+    "description": "لقد حصلت منصتنا على أكثر من 100 ألف تقييم إيجابي من مستخدمينا حول العالم",
+    "writeReview": "اكتب تقييمك",
+    "manyStudents": "العديد من الطلاب والمعلمين استفادوا بشكل كبير من المحتوى التعليمي الذي نقدمه",
+    "haveYouBenefited": "هل أنت أيضا استفدت من خدماتنا؟ من فضلك قدم تقييمك",
+    "testimonials": {
+      "ahmed": {
+        "quote": "المنصة ممتازة وساعدتني في تطوير مهاراتي البرمجية. المحتوى التعليمي عالي الجودة والمدربين متميزين.",
+        "name": "أحمد الشمري",
+        "designation": "مدير التقنية في شركة تقنيات المستقبل"
+      },
+      "noura": {
+        "quote": "تجربة تعليمية فريدة من نوعها. الدورات التدريبية شاملة ومفيدة جداً لتطوير المهارات المهنية.",
+        "name": "نورة القحطاني",
+        "designation": "مديرة التطوير في مجموعة الخليج للتقنية"
+      },
+      "abdullah": {
+        "quote": "منصة طموح ساعدتني في تحقيق أهدافي المهنية. المحتوى عملي ومفيد جداً في مجال عملي.",
+        "name": "عبدالله العتيبي",
+        "designation": "مدير العمليات في شركة الرياض للحلول الرقمية"
+      },
+      "sara": {
+        "quote": "الدعم الفني ممتاز والمحتوى التعليمي يواكب أحدث التقنيات. أنصح بها بشدة لكل من يريد التطور.",
+        "name": "سارة الهاشمي",
+        "designation": "رئيسة قسم البرمجة في شركة دبي للتقنيات"
+      },
+      "mohammed": {
+        "quote": "منصة متكاملة تلبي احتياجات السوق العربي. المدربين متميزين والمحتوى عالي الجودة.",
+        "name": "محمد السالم",
+        "designation": "المدير التنفيذي لشركة المستقبل للبرمجيات"
+      }
+    }
+  },
+  "Filters": {
+    "Loading": "جاري التحميل...",
+    "Filters": "التصفية",
+    "Level": "المستوى",
+    "Beginner": "مبتدئ",
+    "Intermediate": "متوسط",
+    "Advanced": "متقدم",
+    "Language": "اللغة",
+    "Arabic": "العربية",
+    "English": "الإنجليزية",
+    "French": "الفرنسية",
+    "Subject": "الموضوع",
+    "Programming": "برمجة",
+    "Design": "تصميم",
+    "Business": "إدارة أعمال",
+    "Languages": "لغات",
+    "Rating": "التقييم",
+    "Reset": "إعادة تعيين",
+    "Apply": "تطبيق",
+    "Results": "نتيجة",
+    "Sort by": "الترتيب حسب",
+    "Newest": "الأحدث",
+    "Most Popular": "الأكثر شعبية",
+    "Highest Rated": "الأعلى تقييماً",
+    "No courses found": "لم يتم العثور على دورات",
+    "Try adjusting your filters or check back later for new courses": "حاول تعديل عوامل التصفية أو تحقق لاحقاً من الدورات الجديدة"
+  },
+  "Footer": {
+    "newsletter": {
+      "title": "انضم إلى نشرتنا الإخبارية للحصول على آخر تحديثات الدورات",
+      "placeholder": "example@example.com",
+      "button": "إرسال"
+    },
+    "siteMap": {
+      "credit": "شراء الرصيد",
+      "title": "خريطة الموقع",
+      "home": "الرئيسية",
+      "courses": "الدورات",
+      "about": "من نحن",
+      "contact": "تواصل معنا",
+      "subscription": "تفاصيل الاشتراك",
+      "services": "الخدمات"
+    },
+    "copyright": "جميع الحقوق محفوظة لمنصة طموح التعليميه © {year}",
+    "contactUs": "تواصل معنا"
+  },
+  "CoursesPage": {
+    "Category": "الفئة",
+    "Search for your favorite course": "ابحث عن دورتك المفضلة",
+    "Search for a course": "ابحث عن دورة...",
+    "Student Type": "نوع الطالب",
+    "Specialization": "التخصص",
+    "Language": "اللغة",
+    "Duration": "مدة الدورة",
+    "Academic Year": "السنة الدراسية",
+    "Search": "ابحث",
+    "Course Details": "تفاصيل الدورة",
+    "All Types": "جميع الأنواع",
+    "All Specializations": "جميع التخصصات",
+    "All Languages": "جميع اللغات",
+    "All Durations": "جميع المدد",
+    "All Years": "جميع السنوات",
+    "No courses found": "لم يتم العثور على دورات",
+    "Try adjusting your filters or search query": "حاول تعديل عوامل التصفية أو البحث",
+    "No courses available yet": "لا توجد دورات متاحة حالياً",
+    "Please check back later for new courses": "يرجى العودة لاحقاً للاطلاع على الدورات الجديدة",
+    "Reset Filters": "إعادة تعيين التصفية",
+    "Arabic": "العربية",
+    "English": "الإنجليزية",
+    "All Categories": "جميع الفئات",
+    "Less than 4 weeks": "أقل من 4 أسابيع",
+    "1-3 months": "1-3 أشهر",
+    "More than 3 months": "أكثر من 3 أشهر"
+  },
+  "Subscription": {
+    "heading": "اختر الخطة المناسبة لاحتياجاتك!",
+    "monthly": {
+      "title": "اشتراك شهري"
+    },
+    "quarterly": {
+      "title": "اشتراك ربع سنوي"
+    },
+    "yearly": {
+      "title": "اشتراك سنوي"
+    },
+    "period": "شهريا",
+    "best": "أفضل قيمة",
+    "features": {
+      "courses": "الوصول إلى جميع الدورات دون قيود",
+      "downloads": "تحميل الفيديوهات للمشاهدة لاحقا",
+      "forum": "الوصول إلى منتدى تفاعلي مع المدربين",
+      "reports": "تقارير متقدمة عن التقدم الشخصي",
+      "content": "الحصول على محتوى حصري جديد كل شهر"
+    },
+    "subscribe": "اشترك الآن",
+    "showMore": "عرض المزيد",
+    "steps": {
+      "title": "خطوات اتمام الاشتراك",
+      "step1": {
+        "title": "الخطوة الأولى : تسجيل الدخول او انشاء حساب",
+        "description": "إذا كان لديك حساب بالفعل، يمكنك تسجيل الدخول باستخدام بريدك الإلكتروني وكلمة المرور. وإذا كنت مستخدمًا جديدًا، قم بإنشاء حساب جديد عن طريق إدخال البيانات المطلوبة مثل الاسم، البريد الإلكتروني، كلمة المرور، واختيار نوع الحساب (مدرسة/جامعة)."
+      },
+      "step2": {
+        "title": "الخطوة الثانية : اختيار الاشتراك",
+        "description": "ستقوم بتحديد نوع الاشتراك الذي يناسب احتياجاتك التعليمية. يمكنك الاختيار بين الاشتراك الشهري، الربع سنوي، أو السنوي بناءً على خططك الدراسية وميزانيتك."
+      },
+      "step3": {
+        "title": "الخطوة الثالثة : إدخال بيانات الدفع",
+        "description": "يرجى تحويل قيمة الاشتراك إلى الحساب البنكي التالي:",
+        "bankName": "اسم البنك: البنك الوطني الكويتي (NBK)",
+        "accountNumber": "رقم الحساب: 12345678901234",
+        "iban": "رقم الـ IBAN: KW81NBOK00000000012345678901234",
+        "note": "يرجى التأكد من إدخال التفاصيل بدقة أثناء التحويل لضمان اكتمال العملية."
+      },
+      "step4": {
+        "title": "الخطوة الرابعة : رفع إيصال الدفع",
+        "description": "بعد إتمام التحويل البنكي، قم بالتقاط صورة واضحة لإيصال الدفع. ثم توجه إلى النموذج المخصص وقم برفع الصورة لإتمام عملية المراجعة."
+      }
+    }
+  },
+  "About": {
+    "whoWeAre": "من نحن",
+    "welcomeMessage": "مرحبًا بكم في منصة طموح التعليمية ، هي منصة تسعى لتمكين المعلمين والمتعلمين بتجربة فريدة من نوعها تجمع بين الجودة والسهوله",
+    "joinButton": "انضم لنا",
+    "platformFeatures": "ميزات منصتنا",
+    "whatMakesTamouhSpecial": "ماذا تتميز به منصه طموح ؟",
+    "featureDescription1": "انها تسعى على تحسين مخرجات التعليم وانها تضم كفاءه المعلمين المميزين في مجالهم ومما لا شك به تهدف المنصه الى اخراج جيل ناجح مبدع في مجاله الدراسي",
+    "featureDescription2": "نتيح لك منصتنا أدوات تقييم ديناميكية تتضمن اختبارات قصيرة وتقارير مفصلة لمتابعة التقدم. يمكن للطلاب والمعلمين على حد سواء الاستفادة من هذه الأدوات لتحديد نقاط القوة والعمل على تحسين الأداء في المجالات الأخرى.",
+    "benefitsTitle": "فوائد الانضمام إلى منصتنا",
+    "learnSmartAchieveMore": "تعلم بذكاء وحقق المزيد",
+    "benefit1": "تجربة تعليمية موحدة",
+    "benefit2": "تخصيص المحتوى",
+    "benefit3": "مواد تعليمية متعددة الوسائط",
+    "benefit4": "خفض التكاليف",
+    "benefit5": "رضا المستخدم",
+    "benefit6": "أسعار معقولة"
+  },
+  "CourseDetails": {
+    "courseDetails": "تفاصيل الدورة",
+    "watch": "مشاهدة",
+    "totalDurationLabel": "المدة الإجمالية",
+    "notSpecified": "غير محدد",
+    "hours": "ساعات",
+    "home": "الرئيسية",
+    "duration": "من 7 ساعات",
+    "minutes": "دقيقة",
+    "lessons": "الدروس",
+    "added_to_favorites": "تمت إضافة الدورة إلى قائمة المفضلة بنجاح",
+    "removed_from_favorites": "تمت إزالة الدورة من قائمة المفضلة بنجاح",
+    "courseDurationLabel": "مدة الكورس",
+    "totalVideoLengthLabel": "إجمالي مدة الفيديوهات",
+    "lessonsCountLabel": "عدد الدروس",
+    "studentsCountLabel": "عدد المشتركين",
+    "languageLabel": "اللغة",
+    "language": "عربي",
+    "enrollNow": "سجل الآن",
+    "overview": "نبذة عن الكورس",
+    "content": "محتوى الكورس",
+    "comments": "التعليقات",
+    "briefDescription": "وصف مختصر",
+    "whatYouWillLearn": "ما الذي ستتعلمه",
+    "targetAudience": "الفئة المستهدفة",
+    "requirements": "متطلبات الكورس",
+    "courseStructure": "محتوي الدورة",
+    "units": "وحدات",
+    "first_unit": "الوحدة الأولى",
+    "unit": "وحدة",
+    "unit_name": "اسم الوحدة",
+    "enter_unit_name": "أدخل اسم الوحدة",
+    "unit_description": "وصف الوحدة",
+    "enter_unit_description": "أدخل وصف الوحدة",
+    "lesson": "درس",
+    "lesson_title": "عنوان الدرس",
+    "enter_lesson_title": "أدخل عنوان الدرس",
+    "lesson_description": "وصف الدرس",
+    "enter_lesson_description": "أدخل وصف الدرس",
+    "lesson_duration": "المدة (بالدقائق)",
+    "enter_lesson_duration": "أدخل مدة الدرس",
+    "upload_lesson_video": "رفع فيديو الدرس",
+    "video_formats": "الصيغ المدعومة: MP4، WebM",
+    "video_uploaded": "تم رفع الفيديو",
+    "video_required": "الفيديو مطلوب",
+    "video_upload_failed": "فشل في رفع الفيديو",
+    "add_lesson": "إضافة درس",
+    "add_unit": "إضافة وحدة",
+    "back": "رجوع",
+    "save_draft": "حفظ كمسودة",
+    "publish_course": "نشر الدورة",
+    "unit_fields_required": "اسم ووصف الوحدة مطلوبان",
+    "unit_requires_lessons": "يجب أن تحتوي كل وحدة على درس واحد على الأقل",
+    "lesson_fields_required": "جميع حقول الدرس مطلوبة",
+    "units_saved_successfully": "تم حفظ الوحدات بنجاح",
+    "units_saved_as_draft": "تم حفظ الوحدات كمسودة",
+    "course_published_successfully": "تم نشر الدورة بنجاح",
+    "error_saving_units": "خطأ في حفظ الوحدات",
+    "sidebar": {
+      "dashboard": "لوحة التحكم",
+      "courses": "الدورات",
+      "requests": "الطلبات",
+      "settings": "الإعدادات"
+    },
+    "course_type": "الفئة المستهدفة",
+    "select_course_type": "اختر الفئة المستهدفة",
+    "course_tabs": {
+      "my_courses": "دوراتي",
+      "assigned_courses": "الدورات المسندة",
+      "draft_courses": "المسودات"
+    },
+    "coursetab": "الدورات",
+    "search_instructor": "البحث عن مدرب...",
+    "video_processing": "جاري معالجة الفيديو...",
+    "course_overview_video": "فيديو نظرة عامة على الدورة",
+    "course_duration": "مدة الدورة",
+    "enter_course_duration_minutes": "أدخل مدة الدورة بالدقائق",
+    "invalid_course_duration": "يجب أن تكون مدة الدورة رقماً موجباً",
+    "what_you_will_learn": "ماذا ستتعلم",
+    "target_audience": "الفئة المستهدفة",
+    "english": "الإنجليزية",
+    "arabic": "العربية",
+    "enter_learning_point": "أدخل نقطة تعليمية...",
+    "enter_learning_point_ar": "أدخل نقطة تعليمية باللغة العربية...",
+    "enter_target_audience": "أدخل الفئة المستهدفة...",
+    "enter_target_audience_ar": "أدخل الفئة المستهدفة باللغة العربية...",
+    "enter_requirement": "أدخل متطلب...",
+    "enter_requirement_ar": "أدخل متطلب باللغة العربية...",
+    "course_brief_en": "نبذة عن الدورة (بالإنجليزية)",
+    "course_brief_ar": "نبذة عن الدورة (بالعربية)",
+    "enter_course_brief_en": "أدخل نبذة مختصرة عن الدورة باللغة الإنجليزية...",
+    "enter_course_brief_ar": "أدخل نبذة مختصرة عن الدورة باللغة العربية...",
+    "priceLabel": "سعر الدورة",
+    "credits": "رصيد",
+    "walletBalance": "رصيدك",
+    "alreadyEnrolled": "مسجل بالفعل",
+    "confirm_enrollment": "تأكيد التسجيل",
+    "enrollment_confirmation": "هل أنت متأكد من التسجيل في هذه الدورة مقابل {price} رصيد؟",
+    "insufficient_balance_warning": "رصيد غير كافٍ. يرجى إضافة المزيد من الرصيد إلى محفظتك.",
+    "enrollment_success": "تم التسجيل في الدورة بنجاح!",
+    "cancel": "إلغاء",
+    "confirm": "تأكيد",
+    "progress": "التقدم",
+    "write_review": "اكتب تقييماً",
+    "rating": "التقييم",
+    "comment": "التعليق",
+    "comment_placeholder": "شارك تجربتك مع هذه الدورة...",
+    "submit_review": "إرسال التقييم",
+    "rating_required": "يرجى اختيار تقييم",
+    "review_submitted": "تم إرسال تقييمك بنجاح",
+    "edit_review": "تعديل التقييم",
+    "delete_review": "حذف التقييم",
+    "confirm_delete_review": "هل أنت متأكد من حذف تقييمك؟",
+    "review_updated": "تم تحديث تقييمك بنجاح",
+    "review_deleted": "تم حذف تقييمك بنجاح"
+  },
+  "Auth": {
+    "createAccount": "إنشاء حساب",
+    "signInWithGoogle": "عن طريق جوجل",
+    "signInWithFacebook": "عن طريق فيسبوك",
+    "or": "أو",
+    "fullName": "الاسم الكامل",
+    "email": "البريد الإلكتروني",
+    "password": "كلمة المرور",
+    "phone": "رقم الهاتف",
+    "phoneRequired": "يرجى إدخال رقم هاتفك",
+    "studentType": "نوع الطالب",
+    "universityStudent": "طالب جامعي",
+    "schoolStudent": "طالب مدرسي",
+    "graduate": "خريج",
+    "signUp": "سجل الآن",
+    "alreadyHaveAccount": "هل لديك حساب على منصة طموح؟",
+    "signIn": "تسجيل الدخول",
+    "dontHaveAccount": "ليس لديك حساب؟",
+    "forgotPassword": "نسيت كلمة المرور؟",
+    "accountCreated": "تم إنشاء حسابك بنجاح! جاري تسجيل الدخول...",
+    "signInSuccess": "مرحباً بعودتك! تم تسجيل دخولك بنجاح",
+    "errorSigningIn": "تعذر تسجيل الدخول. يرجى التحقق من بياناتك والمحاولة مرة أخرى",
+    "errorCreatingAccount": "لم نتمكن من إنشاء حسابك. يرجى المحاولة مرة أخرى",
+    "fullNameRequired": "يرجى إدخال اسمك الكامل",
+    "fullNameTooShort": "يجب أن يكون اسمك حرفين على الأقل",
+    "emailRequired": "يرجى إدخال بريدك الإلكتروني",
+    "invalidEmail": "يبدو أن هذا البريد الإلكتروني غير صحيح",
+    "passwordRequired": "يرجى إدخال كلمة المرور",
+    "passwordTooShort": "يجب أن تكون كلمة المرور 6 أحرف على الأقل",
+    "passwordRequiresNumber": "يرجى إضافة رقم واحد على الأقل في كلمة المرور",
+    "studentTypeRequired": "يرجى اختيار نوع الطالب",
+    "deviceConflict": {
+      "title": "الحساب نشط على جهاز آخر",
+      "message": "أنت مسجل الدخول حالياً على جهاز آخر. خطتك الحالية تسمح بالوصول من جهاز واحد فقط.",
+      "subMessage": "إذا تابعت، سيتم تسجيل خروجك من الجهاز الآخر.",
+      "goBack": "إلغاء",
+      "forceLogin": "المتابعة وتسجيل الخروج من الجهاز الآخر"
+    },
+    "accountActiveOnAnotherDevice": "أنت مسجل الدخول حالياً على جهاز آخر",
+    "Configuration": "أنت مسجل الدخول حالياً على جهاز آخر",
+    "somethingWentWrong": "حدث خطأ ما. يرجى المحاولة مرة أخرى",
+    "noUserFound": "لم نتمكن من العثور على حساب بهذا البريد الإلكتروني",
+    "incorrectPassword": "كلمة المرور التي أدخلتها غير صحيحة",
+    "emailNotVerified": "يرجى تأكيد بريدك الإلكتروني قبل تسجيل الدخول",
+    "invalidCredentials": "البريد الإلكتروني أو كلمة المرور غير صحيحة. يرجى المحاولة مرة أخرى",
+    "sessionExpired": "انتهت صلاحية جلستك. يرجى تسجيل الدخول مرة أخرى",
+    "accountLocked": "تم قفل حسابك. يرجى الاتصال بالدعم",
+    "tooManyAttempts": "محاولات تسجيل دخول كثيرة. يرجى المحاولة لاحقاً",
+    "networkError": "تعذر الاتصال. يرجى التحقق من اتصال الإنترنت",
+    "emailAlreadyExists": "البريد الإلكتروني مسجل مسبقاً",
+    "unauthorizedAccess": "ليس لديك صلاحية للقيام بهذا الإجراء"
+  },
+  "instructor_dashboard": {
+    "more_options": "المزيد من الخيارات",
+    "lessons_section": {
+      "pdfs_uploaded": "تم رفع الملفات (PDF)",
+      "add_more_pdfs": "إضافة المزيد من الملفات PDF",
+      "upload_lesson_pdfs": "رفع ملفات الدرس (PDF)",
+      "pdf_uploaded": "تم رفع الملف (PDF)",
+      "pdf_upload_failed": "فشل في رفع الملف (PDF)",
+      "change_pdf": "تعديل الملف (PDF)",
+      "view_pdf": "عرض الملف (PDF)",
+      "pdf_formats": "الصيغ المدعومة: PDF",
+      "upload_lesson_pdf": "رفع ملف الدرس (PDF)",
+      "upload_lesson_video": "رفع فيديو الدرس",
+      "upload_lesson_video_description": "رفع فيديو الدرس (الصيغ المدعومة: MP4، WebM)",
+      "upload_lesson_video_error": "فشل في رفع الفيديو",
+      "upload_lesson_video_processing": "جاري معالجة الفيديو..."
+    },
+
+    "owner_required": "مالك الدورة مطلوب",
+    "select_owner": "اختر المالك",
+    "no_create_permission": "ليس لديك الصلاحية لإنشاء دورات",
+    "contact_admin_for_permission": "اتصل بالمسؤول للحصول على الصلاحية",
+    "my_courses": "دوراتي",
+    "create_course": "إنشاء دورة",
+    "settings": "الإعدادات",
+    "lessons": "الدروس",
+    "coming_soon": "قريباً",
+    "no_courses": "لا توجد دورات",
+    "messages": {
+      "course_updated": "تم تحديث الدورة بنجاح",
+      "change_video": "انقر لتغيير الفيديو",
+      "video_uploaded": "تم رفع الفيديو بنجاح",
+      "video_upload_failed": "فشل في رفع الفيديو",
+      "video_processing": "جاري معالجة الفيديو...",
+      "video_error": "خطأ في تحميل الفيديو",
+      "video_preview": "معاينة الفيديو",
+      "upload_video": "رفع فيديو النظرة العامة",
+      "video_formats": "الصيغ المدعومة: MP4، MOV، AVI، WMV"
+    },
+    "create_course_message": "ابدأ بإنشاء دورتك الأولى",
+    "courses": {
+      "section_title": "إدارة الدورات",
+      "search": "البحث في الدورات...",
+      "loading": "جاري تحميل الدورات...",
+      "course_title": "العنوان",
+      "owner": "المالك",
+      "category": "الفئة",
+      "status": "الحالة",
+      "students": "الطلاب",
+      "actions": "الإجراءات",
+      "action_view": "عرض تفاصيل الدورة",
+      "action_edit": "تعديل الدورة",
+      "action_delete": "حذف الدورة",
+      "status_draft": "مسودة",
+      "status_published": "منشور",
+      "status_hidden": "مخفي",
+      "filters": {
+        "Loading": "جاري التحميل...",
+        "title": "التصفية",
+        "status": {
+          "label": "الحالة",
+          "all": "جميع الحالات"
+        },
+        "type": {
+          "label": "نوع الدورة",
+          "all": "جميع الأنواع"
+        },
+        "language": {
+          "label": "اللغة",
+          "all": "جميع اللغات"
+        }
+      },
+      "edit_modal": {
+        "options": {
+          "languages": {
+            "arabic": "العربية",
+            "english": "الإنجليزية"
+          },
+          "course_types": {
+            "university_student": "طالب جامعي",
+            "school_student": "طالب مدرسي"
+          }
+        }
+      }
+    },
+    "add_course": "إضافة دورة",
+    "course_basics": "أساسيات الدورة",
+    "course_units": "وحدات الدورة",
+    "course_name_en": "اسم الدورة (بالإنجليزية)",
+    "course_name_ar": "اسم الدورة (بالعربية)",
+    "category": "الفئة",
+    "select_category": "اختر الفئة",
+    "course_level": "مستوى الدورة",
+    "language": "اللغة",
+    "timezone": "المنطقة الزمنية",
+    "start_date": "تاريخ البدء",
+    "end_date": "تاريخ الانتهاء",
+    "trainer_bio_en": "نبذة عن المدرب (بالإنجليزية)",
+    "trainer_bio_ar": "نبذة عن المدرب (بالعربية)",
+    "course_description_en": "وصف الدورة (بالإنجليزية)",
+    "course_description_ar": "وصف الدورة (بالعربية)",
+    "upload_thumbnail": "رفع صورة الدورة",
+    "click_to_change_thumbnail": "انقر لتغيير الصورة",
+    "image_formats": "الصيغ المدعومة: JPEG، PNG، GIF",
+    "thumbnail_required": "صورة الدورة مطلوبة",
+    "thumbnail_uploaded_successfully": "تم رفع الصورة بنجاح",
+    "thumbnail_upload_failed": "فشل في رفع الصورة",
+    "upload_overview_video": "رفع فيديو نظرة عامة للدورة",
+    "overview_video_uploaded": "تم رفع فيديو النظرة العامة",
+    "click_to_change_video": "انقر لتغيير الفيديو",
+    "overview_video_uploaded_successfully": "تم رفع فيديو النظرة العامة بنجاح",
+    "overview_video_upload_failed": "فشل في رفع فيديو النظرة العامة",
+    "all_fields_required": "جميع الحقول مطلوبة",
+    "invalid_date_range": "يجب أن يكون تاريخ الانتهاء بعد تاريخ البدء",
+    "course_created_successfully": "تم إنشاء الدورة بنجاح",
+    "error_creating_course": "خطأ في إنشاء الدورة",
+    "save_and_continue": "حفظ ومتابعة",
+    "return_to_courses": "العودة إلى الدورات",
+    "options": {
+      "levels": {
+        "beginner": "مبتدئ",
+        "intermediate": "متوسط",
+        "advanced": "متقدم"
+      },
+      "timezones": {
+        "asia_kuwait": "توقيت الكويت (UTC+3)",
+        "africa_cairo": "توقيت القاهرة (UTC+2)"
+      },
+      "course_types": {
+        "university_student": "طالب جامعي",
+        "school_student": "طالب مدرسي"
+      }
+    },
+    "course_visibility": "ظهور الدورة",
+    "visibility_description": "التحكم في ظهور الدورة للطلاب",
+    "visible": "ظاهر",
+    "hidden": "مخفي",
+    "first_unit": "الوحدة الأولى",
+    "unit": "وحدة",
+    "unit_name": "اسم الوحدة",
+    "enter_unit_name": "أدخل اسم الوحدة",
+    "unit_description": "وصف الوحدة",
+    "enter_unit_description": "أدخل وصف الوحدة",
+    "lesson": "درس",
+    "lesson_title": "عنوان الدرس",
+    "enter_lesson_title": "أدخل عنوان الدرس",
+    "lesson_description": "وصف الدرس",
+    "enter_lesson_description": "أدخل وصف الدرس",
+    "lesson_duration": "المدة (بالدقائق)",
+    "enter_lesson_duration": "أدخل مدة الدرس",
+    "upload_lesson_video": "رفع فيديو الدرس",
+    "video_formats": "الصيغ المدعومة: MP4، WebM",
+    "video_uploaded": "تم رفع الفيديو",
+    "video_required": "الفيديو مطلوب",
+    "video_upload_failed": "فشل في رفع الفيديو",
+    "add_lesson": "إضافة درس",
+    "add_unit": "إضافة وحدة",
+    "back": "رجوع",
+    "save_draft": "حفظ كمسودة",
+    "publish_course": "نشر الدورة",
+    "unit_fields_required": "اسم ووصف الوحدة مطلوبان",
+    "unit_requires_lessons": "يجب أن تحتوي كل وحدة على درس واحد على الأقل",
+    "lesson_fields_required": "جميع حقول الدرس مطلوبة",
+    "units_saved_successfully": "تم حفظ الوحدات بنجاح",
+    "units_saved_as_draft": "تم حفظ الوحدات كمسودة",
+    "course_published_successfully": "تم نشر الدورة بنجاح",
+    "error_saving_units": "خطأ في حفظ الوحدات",
+    "sidebar": {
+      "dashboard": "لوحة التحكم",
+      "courses": "الدورات",
+      "requests": "الطلبات",
+      "settings": "الإعدادات"
+    },
+    "course_type": "الفئة المستهدفة",
+    "select_course_type": "اختر الفئة المستهدفة",
+    "course_tabs": {
+      "my_courses": "دوراتي",
+      "assigned_courses": "الدورات المسندة",
+      "draft_courses": "المسودات"
+    },
+    "coursetab": "الدورات",
+    "search_instructor": "البحث عن مدرب...",
+    "video_processing": "جاري معالجة الفيديو...",
+    "course_overview_video": "فيديو نظرة عامة على الدورة",
+    "course_duration": "مدة الدورة",
+    "enter_course_duration_minutes": "أدخل مدة الدورة بالدقائق",
+    "minutes": "دقيقة",
+    "invalid_course_duration": "يجب أن تكون مدة الدورة رقماً موجباً",
+    "totalDurationLabel": "المدة الإجمالية",
+    "notSpecified": "غير محدد",
+    "what_you_will_learn": "ماذا ستتعلم",
+    "target_audience": "الفئة المستهدفة",
+    "requirements": "المتطلبات",
+    "english": "الإنجليزية",
+    "arabic": "العربية",
+    "enter_learning_point": "أدخل نقطة تعليمية...",
+    "enter_learning_point_ar": "أدخل نقطة تعليمية باللغة العربية...",
+    "enter_target_audience": "أدخل الفئة المستهدفة...",
+    "enter_target_audience_ar": "أدخل الفئة المستهدفة باللغة العربية...",
+    "enter_requirement": "أدخل متطلب...",
+    "enter_requirement_ar": "أدخل متطلب باللغة العربية...",
+    "course_brief_en": "نبذة عن الدورة (بالإنجليزية)",
+    "course_brief_ar": "نبذة عن الدورة (بالعربية)",
+    "enter_course_brief_en": "أدخل نبذة مختصرة عن الدورة باللغة الإنجليزية...",
+    "enter_course_brief_ar": "أدخل نبذة مختصرة عن الدورة باللغة العربية...",
+    "priceLabel": "سعر الدورة",
+    "credits": "رصيد",
+    "walletBalance": "رصيدك",
+    "alreadyEnrolled": "مسجل بالفعل",
+    "confirm_enrollment": "تأكيد التسجيل",
+    "enrollment_confirmation": "هل أنت متأكد من التسجيل في هذه الدورة مقابل {price} رصيد؟",
+    "insufficient_balance_warning": "رصيد غير كافٍ. يرجى إضافة المزيد من الرصيد إلى محفظتك.",
+    "enrollment_success": "تم التسجيل في الدورة بنجاح!",
+    "cancel": "إلغاء",
+    "buttons": {
+      "remove": "إزالة",
+      "view_pdf": "عرض الملف (PDF)",
+      "change_pdf": "تعديل الملف (PDF)",
+      "upload_lesson_pdf": "رفع ملف الدرس (PDF)",
+      "pdf_formats": "الصيغ المدعومة: PDF",
+      "save": "حفظ التغييرات",
+      "cancel": "إلغاء"
+    },
+    "confirm": "تأكيد",
+    "course_price": "سعر الدورة",
+    "enter_course_price": "أدخل سعر الدورة",
+    "invalid_price": "يجب أن يكون سعر الدورة رقمًا غير سالب",
+    "edit_drawer": {
+      "title": "تعديل الدورة",
+      "tabs": {
+        "details": "تفاصيل الدورة",
+        "units": "الوحدات"
+      },
+      "thumbnail": {
+        "preview": "معاينة صورة الدورة",
+        "change": "انقر لتغيير الصورة",
+        "upload": "رفع صورة الدورة",
+        "formats": "الصيغ المدعومة: JPEG، PNG، GIF"
+      },
+      "basic_info": "المعلومات الأساسية",
+      "status": "حالة الدورة",
+      "descriptions": "الأوصاف",
+      "course_brief": "نبذة عن الدورة",
+      "learning_points": "نقاط التعلم",
+      "target_audience": "الفئة المستهدفة",
+      "requirements": "المتطلبات",
+      "fields": {
+        "course_timezone": "المنطقة الزمنية",
+        "start_date": "تاريخ بدء الدورة",
+        "end_date": "تاريخ انتهاء الدورة",
+        "title_en": "عنوان الدورة (بالإنجليزية)",
+        "course_level": "مستوى الدورة",
+        "course_type": "الفئة المستهدفة",
+        "title_ar": "عنوان الدورة (بالعربية)",
+        "description_en": "وصف الدورة (بالإنجليزية)",
+        "description_ar": "وصف الدورة (بالعربية)",
+        "course_brief_en": "نبذة عن الدورة (بالإنجليزية)",
+        "course_brief_ar": "نبذة عن الدورة (بالعربية)",
+        "price": "سعر الدورة",
+        "total_minutes": "المدة الإجمالية (بالدقائق)",
+        "published": "منشورة",
+        "visible": "مرئية",
+        "learning_points_en": "نقاط التعلم (بالإنجليزية)",
+        "learning_points_ar": "نقاط التعلم (بالعربية)",
+        "target_audience_en": "الفئة المستهدفة (بالإنجليزية)",
+        "target_audience_ar": "الفئة المستهدفة (بالعربية)",
+        "requirements_en": "المتطلبات (بالإنجليزية)",
+        "requirements_ar": "المتطلبات (بالعربية)"
+      },
+      "placeholders": {
+        "add_learning_point_en": "أضف نقطة تعلم باللغة الإنجليزية...",
+        "add_learning_point_ar": "أضف نقطة تعلم باللغة العربية...",
+        "add_target_audience_en": "أضف فئة مستهدفة باللغة الإنجليزية...",
+        "add_target_audience_ar": "أضف فئة مستهدفة باللغة العربية...",
+        "add_requirement_en": "أضف متطلب باللغة الإنجليزية...",
+        "add_requirement_ar": "أضف متطلب باللغة العربية..."
+      },
+      "buttons": {
+        "remove": "إزالة",
+        "view_pdf": "عرض الملف (PDF)",
+        "change_pdf": "تعديل الملف (PDF)",
+        "upload_lesson_pdf": "رفع ملف الدرس (PDF)",
+        "pdf_formats": "الصيغ المدعومة: PDF",
+        "save": "حفظ التغييرات",
+        "cancel": "إلغاء"
+      }
+    }
+  },
+  "wallet_management": {
+    "close": "إغلاق",
+    "new_balance": "الرصيد الجديد",
+    "selected_user": "المستخدم المختار",
+    "wallet_management": "إدارة المحفظة",
+    "pending_requests": "الطلبات المعلقة",
+    "all_transactions": "جميع المعاملات",
+    "statistics": "الإحصائيات",
+    "export": "تصدير",
+    "adjust_credit": "تعديل الرصيد",
+    "user": "المستخدم",
+    "amount": "المبلغ",
+    "invoice": "الفاتورة",
+    "date": "التاريخ",
+    "status": "الحالة",
+    "actions": "الإجراءات",
+    "review": "مراجعة",
+    "type": "النوع",
+    "notes": "ملاحظات",
+    "view_invoice": "عرض الفاتورة",
+    "credit_purchase": "شراء رصيد",
+    "course_purchase": "شراء دورة",
+    "refund": "استرداد",
+    "adjustment": "تعديل",
+    "all": "الكل",
+    "pending": "معلق",
+    "completed": "مكتمل",
+    "failed": "فشل",
+    "cancelled": "ملغي",
+    "start_date": "تاريخ البداية",
+    "end_date": "تاريخ النهاية",
+    "review_request": "مراجعة الطلب",
+    "requested_amount": "المبلغ المطلوب",
+    "credit_amount": "مبلغ الرصيد",
+    "reject": "رفض",
+    "approve": "موافقة",
+    "search_user": "بحث عن مستخدم",
+    "current_balance": "الرصيد الحالي",
+    "negative_for_deduction": "استخدم قيمة سالبة للخصم",
+    "reason": "السبب",
+    "cancel": "إلغاء",
+    "confirm": "تأكيد",
+    "transaction_statistics": "إحصائيات المعاملات",
+    "credit_purchases": "مشتريات الرصيد",
+    "course_purchases": "مشتريات الدورات",
+    "refunds": "المبالغ المستردة",
+    "average_transaction": "متوسط المعاملات",
+    "count": "العدد",
+    "top_users": "أبرز المستخدمين",
+    "transactions": "المعاملات",
+    "total_amount": "المبلغ الإجمالي",
+    "credit_approved": "تمت الموافقة على طلب الرصيد بنجاح",
+    "credit_rejected": "تم رفض طلب الرصيد بنجاح",
+    "credit_adjusted": "تم تعديل الرصيد بنجاح",
+    "bulk_process_success": "تمت معالجة الطلبات المحددة بنجاح",
+    "approve_selected": "الموافقة على المحدد",
+    "reject_selected": "رفض المحدد",
+    "no_valid_transactions": "لم يتم تحديد معاملات صالحة"
+  },
+  "admin_dashboard": {
+    "accounts": "إدارة الحسابات",
+    "search": "البحث بالاسم أو البريد الإلكتروني أو الهاتف",
+    "add_account": "إضافة حساب",
+    "filters_button": "التصفية",
+    "subscriptions": "الاشتراكات",
+    "settings": "الإعدادات",
+    "filters": {
+      "role": "تصفية حسب الدور",
+      "plan_type": "تصفية حسب الخطة",
+      "subscription_status": "تصفية حسب حالة الاشتراك",
+      "status": "تصفية حسب الحساب",
+      "all_roles": "جميع الأدوار",
+      "all_plan_types": "جميع الخطط",
+      "all_subscription_statuses": "جميع الحالات",
+      "all_statuses": "جميع الحسابات"
+    },
+    "table": {
+      "name": "الاسم",
+      "phone": "الهاتف",
+      "role": "الدور",
+      "subscription_type": "الاشتراك",
+      "contact": "التواصل",
+      "account_status": "الحالة",
+      "actions": "الإجراءات"
+    },
+    "contact": {
+      "call": "اتصال",
+      "email": "بريد إلكتروني"
+    },
+    "status": {
+      "active": "نشط",
+      "disabled": "معطل",
+      "unsubscribed": "غير مشترك"
+    },
+    "actions": {
+      "view": "عرض تفاصيل الحساب",
+      "edit": "تعديل الحساب",
+      "delete": "حذف الحساب"
+    },
+    "messages": {
+      "account_updated": "تم تحديث الحساب بنجاح",
+      "account_deleted": "تم حذف الحساب بنجاح",
+      "account_created": "تم إنشاء الحساب بنجاح",
+      "status_updated": "تم تحديث حالة الحساب بنجاح",
+      "status_enabled": "تم تفعيل الحساب بنجاح",
+      "status_disabled": "تم تعطيل الحساب بنجاح",
+      "subscription_updated": "تم تحديث الاشتراك بنجاح",
+      "error_updating": "خطأ في تحديث الحساب",
+      "error_creating": "خطأ في إنشاء الحساب",
+      "file_too_large": "يجب أن يكون حجم الملف أقل من 5 ميجابايت",
+      "invalid_file": "يرجى رفع ملف صورة",
+      "uploading": "جاري الرفع...",
+      "upload_failed": "فشل رفع الملف",
+      "profile_image_uploaded": "تم رفع صورة الملف الشخصي بنجاح",
+      "invoice_uploaded": "تم رفع الفاتورة بنجاح",
+      "name_required": "الاسم مطلوب",
+      "email_required": "البريد الإلكتروني مطلوب",
+      "phone_required": "رقم الهاتف مطلوب",
+      "password_required": "كلمة المرور مطلوبة",
+      "student_type_required": "نوع الطالب مطلوب",
+      "instructor_bio_ar_required": "السيرة الذاتية بالعربية مطلوبة",
+      "instructor_bio_en_required": "السيرة الذاتية بالإنجليزية مطلوبة",
+      "instructor_name_ar_required": "الاسم بالعربية مطلوب",
+      "instructor_name_en_required": "الاسم بالإنجليزية مطلوب",
+      "plan_type_required": "نوع الخطة مطلوب",
+      "payment_status_required": "حالة الدفع مطلوبة",
+      "start_date_required": "تاريخ البداية مطلوب",
+      "end_date_required": "تاريخ النهاية مطلوب",
+      "invalid_date_range": "يجب أن يكون تاريخ النهاية بعد تاريخ البداية",
+      "course_updated": "تم تحديث الدورة بنجاح",
+      "course_deleted": "تم حذف الدورة بنجاح"
+    },
+    "view_modal": {
+      "title": "تفاصيل الحساب",
+      "fields": {
+        "name": "الاسم",
+        "email": "البريد الإلكتروني",
+        "phone": "الهاتف",
+        "role": "الدور",
+        "subscription_status": "حالة الاشتراك",
+        "student_type": "نوع الطالب",
+        "account_status": "حالة الحساب"
+      },
+      "buttons": {
+        "close": "إغلاق"
+      }
+    },
+    "add_account_modal": {
+      "title": "إضافة حساب جديد",
+      "basic_info": {
+        "name": "الاسم",
+        "email": "البريد الإلكتروني",
+        "phone": "الهاتف",
+        "password": "كلمة المرور",
+        "role": "الدور",
+        "student_type": "نوع الطالب",
+        "roles": {
+          "admin": "مدير النظام",
+          "instructor": "مدرس",
+          "subscriber": "مشترك",
+          "user": "مستخدم عادي"
+        },
+        "student_types": {
+          "university": "طالب جامعي",
+          "school": "طالب مدرسي"
+        }
+      },
+      "instructor_info": {
+        "title": "معلومات المدرس",
+        "name_ar": "الاسم (بالعربية)",
+        "name_en": "الاسم (بالإنجليزية)",
+        "bio_ar": "السيرة الذاتية (بالعربية)",
+        "bio_en": "السيرة الذاتية (بالإنجليزية)",
+        "job_title_ar": "المسمى الوظيفي (بالعربية)",
+        "job_title_en": "المسمى الوظيفي (بالإنجليزية)",
+        "address": "العنوان",
+        "permissions": "صلاحيات المدرس",
+        "can_create_courses": "يمكنه إنشاء دورات جديدة"
+      },
+      "buttons": {
+        "add": "إنشاء الحساب",
+        "cancel": "إلغاء"
+      }
+    },
+    "edit_modal": {
+      "title": "تعديل الحساب",
+      "name": "الاسم",
+      "email": "البريد الإلكتروني",
+      "phone": "الهاتف",
+      "password": "كلمة المرور الجديدة",
+      "role": "الدور",
+      "account_status": "حالة الحساب",
+      "subscription_status": "حالة الاشتراك",
+      "roles": {
+        "admin": "مدير النظام",
+        "instructor": "مدرس",
+        "subscriber": "مشترك",
+        "user": "مستخدم عادي"
+      },
+      "subscription_statuses": {
+        "subscribed": "مشترك",
+        "unsubscribed": "غير مشترك",
+        "pending": "قيد الانتظار",
+        "overdue": "متأخر"
+      },
+      "subscription_details": {
+        "title": "تفاصيل الاشتراك",
+        "plan_type": "نوع الخطة",
+        "payment_status": "حالة الدفع",
+        "end_date": "تاريخ النهاية",
+        "start_date": "تاريخ البداية",
+        "notes": "ملاحظات",
+        "invoice": {
+          "title": "صورة الفاتورة",
+          "upload": "رفع الفاتورة"
+        },
+        "plan_types": {
+          "monthly": "شهري",
+          "quarterly": "ربع سنوي",
+          "yearly": "سنوي"
+        },
+        "payment_statuses": {
+          "completed": "مكتمل",
+          "pending": "قيد الانتظار",
+          "failed": "فشل",
+          "cancelled": "ملغي"
+        }
+      },
+      "instructor_info": {
+        "title": "معلومات المدرس",
+        "name_ar": "الاسم (بالعربية)",
+        "name_en": "الاسم (بالإنجليزية)",
+        "bio_ar": "السيرة الذاتية (بالعربية)",
+        "bio_en": "السيرة الذاتية (بالإنجليزية)",
+        "job_title_ar": "المسمى الوظيفي (بالعربية)",
+        "job_title_en": "المسمى الوظيفي (بالإنجليزية)",
+        "address": "العنوان",
+        "permissions": "صلاحيات المدرس",
+        "can_create_courses": "يمكنه إنشاء دورات جديدة"
+      },
+      "buttons": {
+        "save": "حفظ التغييرات",
+        "cancel": "إلغاء"
+      }
+    },
+    "delete_modal": {
+      "title": "حذف الحساب",
+      "message": "هل أنت متأكد من حذف حساب {name}؟ لا يمكن التراجع عن هذا الإجراء.",
+      "buttons": {
+        "confirm": "حذف",
+        "cancel": "إلغاء"
+      }
+    },
+    "tabs": {
+      "more": "المزيد",
+      "more_options": "المزيد من الخيارات",
+      "accounts": "إدارة الحسابات",
+      "subscriptions": "الاشتراكات",
+      "courses": "الدورات",
+      "wallet": "المحفظة",
+      "transactions": "المعاملات",
+      "details": "تفاصيل الدورة",
+      "units": "الوحدات والدروس",
+      "specialists": "المختصين",
+      "create_courses": "إنشاء دورة جديدة",
+      "categories": "التصنيفات"
+    },
+    "units": {
+      "title": "الوحدات",
+      "add_unit": "إضافة وحدة",
+      "edit_unit": "تعديل الوحدة",
+      "delete_unit": "حذف الوحدة",
+      "delete_confirmation": "هل أنت متأكد من حذف هذه الوحدة؟",
+      "unit_created": "تم إنشاء الوحدة بنجاح",
+      "unit_updated": "تم تحديث الوحدة بنجاح",
+      "unit_deleted": "تم حذف الوحدة بنجاح",
+      "units_reordered": "تم إعادة ترتيب الوحدات بنجاح",
+      "title_en": "العنوان (بالإنجليزية)",
+      "title_ar": "العنوان (بالعربية)",
+      "description_en": "الوصف (بالإنجليزية)",
+      "description_ar": "الوصف (بالعربية)",
+      "visible": "مرئي",
+      "edit_tooltip": "تعديل الوحدة",
+      "delete_tooltip": "حذف الوحدة"
+    },
+    "lessons": {
+      "title_en_required": "عنوان الدرس باللغة الإنجليزية مطلوب",
+      "title_ar_required": "عنوان الدرس باللغة العربية مطلوب",
+      "description_en_required": "وصف الدرس باللغة الإنجليزية مطلوب",
+      "description_ar_required": "وصف الدرس باللغة العربية مطلوب",
+      "invalid_state": "الحالة غير صالحة",
+      "pdfs_uploaded": "تم رفع الملفات (PDF)",
+      "uploading_video": "جاري رفع الفيديو...",
+      "uploading_pdf": "جاري رفع الملفات PDF...",
+      "upload_lesson_pdfs": "رفع ملفات الدرس (PDF)",
+      "pdf_previews": "معاينة الملفات PDF",
+      "add_more_pdfs": "إضافة المزيد من الملفات PDF",
+      "download_pdf": "تحميل الملف PDF",
+      "view_pdf_full": "عرض الملف PDF بالكامل",
+      "change_video": "انقر لتغيير الفيديو",
+      "video_processing": "جاري معالجة الفيديو...",
+      "add_lesson": "إضافة درس",
+      "edit_lesson": "تعديل الدرس",
+      "delete_lesson": "حذف الدرس",
+      "delete_confirmation": "هل أنت متأكد من حذف هذا الدرس؟",
+      "lesson_created": "تم إنشاء الدرس بنجاح",
+      "lesson_updated": "تم تحديث الدرس بنجاح",
+      "lesson_deleted": "تم حذف الدرس بنجاح",
+      "lessons_reordered": "تم إعادة ترتيب الدروس بنجاح",
+      "title_en": "العنوان (بالإنجليزية)",
+      "title_ar": "العنوان (بالعربية)",
+      "description_en": "الوصف (بالإنجليزية)",
+      "description_ar": "الوصف (بالعربية)",
+      "duration": "المدة (بالدقائق)",
+      "video_url": "رابط الفيديو",
+      "visible": "مرئي",
+      "edit_tooltip": "تعديل الدرس",
+      "delete_tooltip": "حذف الدرس",
+      "video_preview": "معاينة فيديو الدرس",
+      "video_uploaded": "تم رفع الفيديو بنجاح",
+      "video_upload_failed": "فشل في رفع الفيديو",
+      "upload_lesson_video": "رفع فيديو الدرس",
+      "video_formats": "الصيغ المدعومة: MP4، WebM",
+      "change_pdf": "انقر لتغيير ملف PDF",
+      "upload_lesson_pdf": "رفع ملف PDF للدرس",
+      "pdf_formats": "الصيغ المدعومة: PDF",
+      "pdf_uploaded": "تم رفع ملف PDF بنجاح",
+      "pdf_upload_failed": "فشل في رفع ملف PDF",
+      "pdf_preview": "معاينة ملف PDF",
+      "view_pdf": "عرض PDF"
+    },
+    "buttons": {
+      "save": "حفظ التغييرات",
+      "cancel": "إلغاء",
+      "delete": "حذف",
+      "apply_changes": "تطبيق التغييرات",
+      "save_changes": "حفظ التغييرات",
+      "remove": "إزالة"
+    },
+    "subscriptions_tab": {
+      "name": "الاسم",
+      "subscription_id": "رقم الاشتراك",
+      "subscription_type": "نوع الاشتراك",
+      "date": "تاريخ البداية",
+      "status": "الحالة",
+      "actions": "الإجراءات",
+      "search_placeholder": "البحث بالاسم أو رقم الاشتراك...",
+      "loading": "جاري تحميل الاشتراكات...",
+      "invoice_details": "تفاصيل الفاتورة",
+      "user": "المستخدم",
+      "close": "إغلاق",
+      "change_status": "تغيير الحالة",
+      "select_status": "اختر الحالة الجديدة",
+      "cancel": "إلغاء",
+      "tooltips": {
+        "view_invoice": "عرض تفاصيل الفاتورة",
+        "change_status": "تغيير حالة الدفع"
+      },
+      "edit_modal": {
+        "subscription_details": {
+          "title": "تفاصيل الاشتراك",
+          "plan_type": "نوع الخطة",
+          "payment_status": "حالة الدفع",
+          "start_date": "تاريخ البداية",
+          "notes": "ملاحظات",
+          "invoice": {
+            "title": "صورة الفاتورة",
+            "upload": "رفع الفاتورة"
+          },
+          "plan_types": {
+            "monthly": "شهري",
+            "quarterly": "ربع سنوي",
+            "yearly": "سنوي"
+          },
+          "payment_statuses": {
+            "completed": "مكتمل",
+            "pending": "قيد الانتظار",
+            "failed": "فشل",
+            "cancelled": "ملغي"
+          }
+        },
+        "subscription_statuses": {
+          "subscribed": "مشترك",
+          "unsubscribed": "غير مشترك",
+          "pending": "قيد الانتظار",
+          "overdue": "متأخر",
+          "completed": "مكتمل"
+        }
+      },
+      "buttons": {
+        "apply_changes": "تطبيق التغييرات",
+        "save_changes": "حفظ التغييرات"
+      }
+    },
+    "modals": {
+      "buttons": {
+        "save": "حفظ التغييرات",
+        "cancel": "إلغاء",
+        "confirm": "تأكيد",
+        "close": "إغلاق",
+        "delete": "حذف"
+      }
+    },
+    "specialists": {
+      "title": "إدارة المتخصصين",
+      "form": {
+        "name_en": "الاسم (بالإنجليزية)",
+        "name_ar": "الاسم (بالعربية)",
+        "title_en": "المسمى الوظيفي (بالإنجليزية)",
+        "title_ar": "المسمى الوظيفي (بالعربية)",
+        "order": "ترتيب العرض",
+        "image": "الصورة الشخصية"
+      },
+      "table": {
+        "name_en": "الاسم (بالإنجليزية)",
+        "name_ar": "الاسم (بالعربية)",
+        "title_en": "المسمى الوظيفي (بالإنجليزية)",
+        "title_ar": "المسمى الوظيفي (بالعربية)",
+        "order": "الترتيب",
+        "image": "الصورة",
+        "actions": "الإجراءات"
+      },
+      "actions": {
+        "edit": "تعديل",
+        "create": "إضافة متخصص",
+        "update": "تحديث البيانات",
+        "delete": "حذف",
+        "cancel": "إلغاء",
+        "confirm_delete": "تأكيد الحذف"
+      },
+      "messages": {
+        "created": "تم إضافة المتخصص بنجاح",
+        "updated": "تم تحديث بيانات المتخصص بنجاح",
+        "deleted": "تم حذف المتخصص بنجاح",
+        "image_uploaded": "تم رفع الصورة بنجاح",
+        "image_upload_error": "حدث خطأ أثناء رفع الصورة",
+        "image_required": "الصورة الشخصية مطلوبة",
+        "all_fields_required": "جميع الحقول مطلوبة",
+        "order_taken": "ترتيب العرض مستخدم بالفعل"
+      },
+      "delete_modal": {
+        "title": "حذف متخصص",
+        "message": "هل أنت متأكد من حذف {name}؟ لا يمكن التراجع عن هذا الإجراء."
+      }
+    },
+    "languages": {
+      "en": "الإنجليزية",
+      "ar": "العربية"
+    }
+  },
+  "courses-management": {
+    "search": "البحث في الدورات...",
+    "loading": "جاري تحميل الدورات...",
+    "filters": {
+      "title": "التصفية",
+      "status": {
+        "label": "الحالة",
+        "all": "جميع الحالات",
+        "draft": "مسودة",
+        "published": "منشور",
+        "hidden": "مخفي"
+      },
+      "type": {
+        "label": "نوع الدورة",
+        "all": "جميع الأنواع"
+      },
+      "language": {
+        "label": "اللغة",
+        "all": "جميع اللغات"
+      }
+    },
+    "table": {
+      "title": "العنوان",
+      "owner": "المالك",
+      "category": "الفئة",
+      "status": "الحالة",
+      "students": "الطلاب",
+      "actions": "الإجراءات"
+    },
+    "actions": {
+      "view": "عرض تفاصيل الدورة",
+      "edit": "تعديل الدورة",
+      "delete": "حذف الدورة"
+    },
+    "view_modal": {
+      "title": "تفاصيل الدورة",
+      "basic_info": "المعلومات الأساسية",
+      "instructors": "المدرسون",
+      "stats": "إحصائيات الدورة",
+      "enrolled_students": "الطلاب المسجلون",
+      "units_count": "عدد الوحدات",
+      "course_level": "مستوى الدورة",
+      "buttons": {
+        "close": "إغلاق"
+      }
+    },
+    "edit_modal": {
+      "title": "تعديل الدورة",
+      "basic_info": "المعلومات الأساسية",
+      "status": "حالة الدورة",
+      "descriptions": "الأوصاف",
+      "course_details": "تفاصيل الدورة",
+      "course_dates": "تواريخ الدورة",
+      "instructors": "المدربون",
+      "tabs": {
+        "details": "تفاصيل الدورة",
+        "units": "وحدات الدورة"
+      },
+      "search_instructors": "البحث عن مدرب...",
+      "additional_instructors": "المدربون الإضافيون",
+      "fields": {
+        "course_level": "مستوى الدورة",
+        "course_duration": "مدة الدورة",
+        "total_minutes": "الدقائق الكلية",
+
+        "search_instructors": "البحث عن مدرب...",
+        "course_brief": "نبذة مختصرة عن الدورة",
+        "course_brief_en": "نبذة مختصرة عن الدورة بالإنجليزية",
+        "course_brief_ar": "نبذة مختصرة عن الدورة بالعربية",
+        "title_en": "عنوان الدورة (بالإنجليزية)",
+        "title_ar": "عنوان الدورة (بالعربية)",
+        "description_en": "وصف الدورة (بالإنجليزية)",
+        "description_ar": "وصف الدورة (بالعربية)",
+        "course_type": "نوع الدورة",
+        "course_timezone": "المنطقة الزمنية للدورة",
+        "published": "منشورة",
+        "visible": "مرئية",
+        "start_date": "تاريخ البدء",
+        "end_date": "تاريخ الانتهاء",
+        "learning_points": "نقاط التعلم",
+        "learning_points_en": "نقاط التعلم (بالإنجليزية)",
+        "learning_points_ar": "نقاط التعلم (بالعربية)",
+        "target_audience": "الفئة المستهدفة",
+        "target_audience_en": "الفئة المستهدفة (بالإنجليزية)",
+        "target_audience_ar": "الفئة المستهدفة (بالعربية)",
+        "requirements": "المتطلبات",
+        "requirements_en": "المتطلبات (بالإنجليزية)",
+        "requirements_ar": "المتطلبات (بالعربية)",
+        "price": "سعر الدورة"
+      },
+      "placeholders": {
+        "select_category": "اختر فئة",
+        "add_learning_point_en": "أضف نقطة تعلم بالإنجليزية واضغط Enter",
+        "add_learning_point_ar": "أضف نقطة تعلم بالعربية واضغط Enter",
+        "add_target_audience_en": "أضف فئة مستهدفة بالإنجليزية واضغط Enter",
+        "add_target_audience_ar": "أضف فئة مستهدفة بالعربية واضغط Enter",
+        "add_requirement_en": "أضف متطلب بالإنجليزية واضغط Enter",
+        "add_requirement_ar": "أضف متطلب بالعربية واضغط Enter",
+        "enter_price": "أدخل سعر الدورة"
+      },
+      "errors": {
+        "category_required": "يرجى اختيار فئة"
+      },
+      "options": {
+        "course_types": {
+          "university_student": "طالب جامعي",
+          "school_student": "طالب مدرسي"
+        },
+        "errors": {
+          "category_required": "يرجى اختيار فئة"
+        },
+        "timezones": {
+          "africa_cairo": "القاهرة (UTC+2)",
+          "asia_kuwait": "الكويت (UTC+3)"
+        },
+        "languages": {
+          "arabic": "العربية",
+          "english": "الإنجليزية"
+        },
+        "levels": {
+          "BEGINNER": "مبتدئ",
+          "INTERMEDIATE": "متوسط",
+          "ADVANCED": "متقدم"
+        }
+      },
+      "thumbnail": {
+        "preview": "معاينة الصورة المصغرة",
+        "change": "انقر أو اسحب لتغيير الصورة المصغرة",
+        "upload": "انقر أو اسحب لرفع صورة مصغرة",
+        "formats": "الصيغ المدعومة: JPEG, PNG, GIF",
+        "success": "تم رفع الصورة المصغرة بنجاح",
+        "error": "خطأ في رفع الصورة المصغرة"
+      },
+      "video": {
+        "preview": "معاينة الفيديو",
+        "change": "انقر أو اسحب لتغيير الفيديو",
+        "upload": "انقر أو اسحب لرفع فيديو",
+        "formats": "الصيغ المدعومة: MP4, MOV, AVI",
+        "success": "تم رفع الفيديو بنجاح",
+        "error": "خطأ في رفع الفيديو",
+        "processing": "جاري معالجة الفيديو..."
+      },
+      "select_owner": "اختر مالك الدورة",
+      "add_instructor": "إضافة مدرب",
+      "search_instructor": "البحث عن مدرب...",
+      "remove_instructor": "إزالة المدرب",
+      "can_update": "يمكنه التعديل",
+      "can_delete": "يمكنه الحذف",
+      "buttons": {
+        "save": "حفظ التغييرات",
+        "cancel": "إلغاء"
+      }
+    },
+    "delete_modal": {
+      "success": "تم حذف الدورة بنجاح",
+      "title": "حذف الدورة",
+      "message": "هل أنت متأكد من حذف {title}؟ لا يمكن التراجع عن هذا الإجراء.",
+      "buttons": {
+        "confirm": "حذف",
+        "cancel": "إلغاء"
+      }
+    },
+    "messages": {
+      "course_updated": "تم تحديث الدورة بنجاح",
+      "course_deleted": "تم حذف الدورة بنجاح",
+      "error_updating": "خطأ في تحديث الدورة"
+    }
+  },
+  "student_dashboard": {
+    "title": "لوحة التعلم الخاصة بي",
+    "enrolled_courses": "الدورات المسجلة",
+    "favorite_courses": "الدورات المفضلة",
+    "no_enrolled_courses": "لم تسجل في أي دورة بعد",
+    "no_favorite_courses": "لم تضف أي دورة إلى المفضلة بعد",
+    "continue_learning": "متابعة التعلم",
+    "start_course": "ابدأ الدورة",
+    "completed": "مكتمل"
+  },
+  "Payment": {
+    "title": "نموذج طلب دفع رسوم الاشتراك",
+    "subtitle": "قم برفع صورة الدفع الآن لمراجعتها سريعاً وتفعيل اشتراكك!",
+    "bankDetails": "تفاصيل الحساب البنكي",
+    "bankName": "اسم البنك",
+    "NBK": "البنك الوطني الكويتي",
+    "accountNumber": "رقم الحساب",
+    "iban": "رقم الـ IBAN",
+    "verificationNote": "تأكد من كتابة/إظهار بريدك الإلكتروني على الإيصال لمعالجة أسرع. سيتم تحويل رصيدك بمجرد مراجعة الإيصال.",
+    "notes": "ملاحظات",
+    "notesPlaceholder": "أضف أي ملاحظات إضافية هنا...",
+    "clickToUpload": "اضغط هنا لإرفاق الملف أو قم بالسحب والإفلات",
+    "supportedFormats": "الصيغ المدعومة: PNG ، JPEG",
+    "submit": "إرسال",
+    "success": "تم إرسال تفاصيل الدفع بنجاح! سنراجعها قريباً.",
+    "uploadError": "فشل في رفع الصورة. يرجى المحاولة مرة أخرى.",
+    "noImage": "يرجى رفع إيصال الدفع"
+  },
+  "LessonPage": {
+    "enrollmentRequired": "التسجيل مطلوب",
+    "enrollmentMessage": "تحتاج إلى التسجيل في هذه الدورة للوصول إلى محتوى الدرس.",
+    "goToCourse": "الذهاب إلى الدورة",
+    "courseContent": "محتوى الدورة",
+    "unit": "الوحدة",
+    "description": "الوصف",
+    "materials": "المواد التعليمية",
+    "noMaterialsAvailable": "لا توجد مواد تعليمية متاحة لهذا الدرس",
+    "videoNotAvailable": "الفيديو غير متاح",
+    "previousLesson": "الدرس السابق",
+    "nextLesson": "الدرس التالي",
+    "material": "المادة",
+    "viewPdf": "عرض PDF",
+    "downloadPdf": "تحميل PDF"
+  },
+  "transactions_management": {
+    "transactions": "المعاملات",
+    "all_transactions": "جميع المعاملات",
+    "wallet_transactions": "معاملات المحفظة",
+    "course_transactions": "معاملات الدورات",
+    "user": "المستخدم",
+    "type": "النوع",
+    "amount": "المبلغ",
+    "status": "الحالة",
+    "date": "التاريخ",
+    "actions": "الإجراءات",
+    "details": "التفاصيل",
+    "course": "الدورة",
+    "price": "السعر",
+    "purchase_date": "تاريخ الشراء",
+    "valid_until": "صالح حتى",
+    "unlimited": "غير محدود",
+    "view_invoice": "عرض الفاتورة",
+    "loading": "جاري تحميل المعاملات...",
+    "no_transactions": "لا توجد معاملات",
+    "showing_items": "عرض {from} إلى {to} من {total} معاملة"
+  },
+  "Credits": {
+    "fileUploaded": "تم رفع الملف بنجاح",
+    "wamadh": "ومض",
+    "clickToUpload": "اضغط هنا لرفع إيصال الدفع أو قم بالسحب والإفلات",
+    "imageOrPdf": "صورة أو ملف PDF",
+    "supportedFormats": "الصيغ المدعومة: PNG, JPEG, PDF",
+    "heading": "شراء رصيد",
+    "purchaseCredits": "شراء رصيد",
+    "oneToOneRate": "1 دينار كويتي = 1 رصيد",
+    "amount": "المبلغ",
+    "enterAmount": "أدخل المبلغ بالدينار الكويتي",
+    "invoice": "رفع الإيصال",
+    "invoicePlaceholder": "قم برفع إيصال الدفع",
+    "submit": "إرسال الطلب",
+    "requestSubmitted": "تم إرسال طلب الرصيد",
+    "redirectingToWallet": "تم إرسال طلبك بنجاح. جاري التحويل إلى المحفظة...",
+    "steps": {
+      "title": "كيفية شراء الرصيد",
+      "step1": {
+        "title": "اختر المبلغ",
+        "description": "حدد كمية الرصيد التي تريد شراءها. معدل التحويل هو 1 رصيد = 1 دينار كويتي."
+      },
+      "step2": {
+        "title": "إجراء الدفع",
+        "description": "قم بتحويل المبلغ المطلوب إلى حسابنا المصرفي واحتفظ بإيصال الدفع."
+      },
+      "step3": {
+        "title": "التفاصيل المصرفية",
+        "description": "استخدم التفاصيل المصرفية التالية لإجراء الدفع:",
+        "bankName": "البنك: بنك الكويت الدولي",
+        "accountNumber": "رقم الحساب: XXXX-XXXX-XXXX-XXXX",
+        "iban": "IBAN: KWXX-XXXX-XXXX-XXXX-XXXX-XXXX-XXXX",
+        "note": "يرجى تضمين بريدك الإلكتروني في وصف التحويل للمعالجة السريعة"
+      },
+      "step4": {
+        "title": "تقديم الطلب",
+        "description": "قم بتحميل إيصال الدفع وتقديم طلب شراء الرصيد. سنقوم بمعالجته خلال 24 ساعة."
+      }
+    }
+  },
+  "category_management": {
+    "title": "إدارة التصنيفات",
+    "table": {
+      "image": "الصورة",
+      "name_en": "الاسم بالإنجليزية",
+      "name_ar": "الاسم بالعربية",
+      "actions": "الإجراءات",
+      "no_data": "لا توجد تصنيفات"
+    },
+    "actions": {
+      "create": "إنشاء تصنيف",
+      "edit": "تعديل",
+      "delete": "حذف",
+      "update": "تحديث",
+      "cancel": "إلغاء"
+    },
+    "modal": {
+      "create_title": "إنشاء تصنيف جديد",
+      "edit_title": "تعديل التصنيف"
+    },
+    "form": {
+      "english": "الإنجليزية",
+      "arabic": "العربية",
+      "name": "الاسم",
+      "image": "صورة التصنيف",
+      "drag_drop": "اسحب وأفلت صورة هنا، أو انقر للاختيار",
+      "image_requirements": "PNG، JPG أو JPEG (الحد الأقصى 2 ميجابايت)",
+      "uploading": "جاري الرفع..."
+    },
+    "success": {
+      "create": "تم إنشاء التصنيف بنجاح",
+      "update": "تم تحديث التصنيف بنجاح",
+      "delete": "تم حذف التصنيف بنجاح",
+      "image_upload": "تم رفع الصورة بنجاح"
+    },
+    "error": {
+      "image_upload": "فشل في رفع الصورة"
+    }
+  },
+  "user_settings": {
+    "messages": {
+      "profile_updated": "تم تحديث الملف الشخصي بنجاح",
+      "image_upload_failed": "فشل في رفع صورة الملف الشخصي",
+      "account_deleted": "تم حذف حسابك بنجاح"
+    },
+    "profile_image": {
+      "change": "تغيير صورة الحساب",
+      "remove": "إزالة صورة الحساب",
+      "uploading": "جاري الرفع..."
+    },
+    "page_title": "إعدادات الحساب",
+    "subscription_status": "حالة الاشتراك",
+    "basic_info": {
+      "title": "المعلومات الأساسية",
+      "description": "قد تكون بعض المعلومات مرئية للمستخدمين الآخرين على منصتنا لضمان تحسين تجربة المستخدم والتفاعل.",
+      "table": {
+        "header": {
+          "field": "الحقل",
+          "value": "القيمة",
+          "description": "الوصف"
+        },
+        "fields": {
+          "full_name": {
+            "label": "الاسم الكامل",
+            "description": "اسم المستخدم الخاص بك الذي نستخدمه للتحقق من هويتك وسيظهر على شهاداتك."
+          },
+          "password": {
+            "label": "كلمة المرور",
+            "description": "كلمة المرور الخاصة بك للدخول إلى حسابك.",
+            "current": "كلمة المرور الحالية",
+            "new": "كلمة المرور الجديدة",
+            "confirm": "تأكيد كلمة المرور"
+          },
+          "student_type": {
+            "label": "نوع الطالب",
+            "description": "نوع الطالب الخاص بك الذي يحدد الاشتراكات والدورات.",
+            "university": "جامعي",
+            "school": "مدرسي",
+            "not_specified": "غير محدد"
+          }
+        }
+      }
+    },
+    "instructor_info": {
+      "address": {
+        "label": "العنوان",
+        "description": "عنوانك كمدرس في المنصة."
+      },
+      "bio": {
+        "label": "السيرة الذاتية",
+        "description": "سيرتك الذاتية التي ستظهر للطلاب."
+      },
+      "job_title": {
+        "label": "المسمى الوظيفي",
+        "description": "مسماك الوظيفي الذي سيظهر للطلاب."
+      },
+      "name": {
+        "label": "اسم المدرب",
+        "label_ar": "الاسم بالعربية",
+        "label_en": "الاسم بالإنجليزية",
+        "arabic": "الاسم بالعربية",
+        "english": "الاسم بالإنجليزية",
+        "description": "اسمك كما سيظهر للطلاب باللغتين العربية والإنجليزية"
+      }
+    },
+    "contact_info": {
+      "title": "معلومات التواصل",
+      "description": "قد تكون بعض المعلومات مرئية للمستخدمين الاخرين على منصتنا لضمان تحسين تجربة الاستخدام والتفاعل.",
+      "email": {
+        "label": "البريد الإلكتروني",
+        "description": "البريد الإلكتروني المستخدم للتواصل وتسجيل الدخول."
+      },
+      "phone": {
+        "label": "رقم الهاتف",
+        "description": "رقم هاتفك المستخدم للتحقق من هويتك."
+      }
+    },
+    "delete_account": {
+      "subtitle": "نأسف لرغبتك في المغادرة!",
+      "backup_info": "إذا كنت ترغب في الاحتفاظ بنسخة من سجلاتك أو شهاداتك قبل المتابعة، يمكنك الاطلاع على الإرشادات الخاصة بتنزيل الشهادات أو المواد المرتبطة بدوراتك.",
+      "title": "حذف الحساب",
+
+      "warning": "بمجرد حذف حسابك، لا يمكن التراجع عن هذا الإجراء. يرجى التأكد من قرارك.",
+      "courses_warning": "سيتم حذف جميع تقدمك في الدورات، والتسجيلات، وبياناتك الشخصية بشكل نهائي.",
+      "button": "حذف حسابي",
+      "modal": {
+        "title": "حذف الحساب",
+        "description": "لا يمكن التراجع عن هذا الإجراء. يرجى إدخال كلمة المرور للتأكيد.",
+        "password": "أدخل كلمة المرور",
+        "cancel": "إلغاء",
+        "confirm": "حذف الحساب"
+      }
+    },
+    "edit": {
+      "title": "تعديل",
+      "save": "حفظ",
+      "cancel": "إلغاء"
+    }
+  }
+}

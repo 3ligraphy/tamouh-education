@@ -1,0 +1,44 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@layer base {
+  :root {
+    --radius: 0.5rem;
+  }
+}
+
+/* iOS Modal Fixes */
+@supports (-webkit-touch-callout: none) {
+  .fixed {
+    position: fixed !important;
+  }
+
+  /* Fix for modals and overlays */
+  [role="dialog"],
+  [role="alertdialog"] {
+    position: fixed;
+    top: 50% !important;
+    left: 50% !important;
+    transform: translate(-50%, -50%) !important;
+    max-height: 90vh;
+    max-width: 90vw;
+    margin: 0;
+    -webkit-transform: translate3d(-50%, -50%, 0);
+    transform: translate3d(-50%, -50%, 0);
+  }
+
+  /* Prevent content scrolling when modal is open */
+  body.modal-open {
+    position: fixed;
+    width: 100%;
+  }
+}
+
+/* Fix for iOS input zoom */
+@media screen and (-webkit-min-device-pixel-ratio: 0) {
+  select,
+  textarea,
+  input {
+    font-size: 16px !important;
+  }
+}

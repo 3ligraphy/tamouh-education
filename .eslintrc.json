@@ -1,0 +1,128 @@
+{
+  "$schema": "https://json.schemastore.org/eslintrc.json",
+  "env": {
+    "browser": false,
+    "es2021": true,
+    "node": true
+  },
+  "extends": [
+    "plugin:react/recommended",
+    "plugin:node/recommended",
+    "plugin:prettier/recommended",
+    "plugin:react-hooks/recommended",
+    "plugin:jsx-a11y/recommended",
+    "plugin:import/errors",
+    "plugin:import/warnings"
+  ],
+  "plugins": ["react", "unused-imports", "import", "jsx-a11y", "prettier"],
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "ecmaFeatures": {
+      "jsx": true
+    },
+    "ecmaVersion": 12,
+    "sourceType": "module"
+  },
+  "settings": {
+    "react": {
+      "version": "detect"
+    },
+    "import/resolver": {
+      "node": {
+        "extensions": [".js", ".jsx", ".ts", ".tsx"]
+      }
+    }
+  },
+  "rules": {
+    "node/no-unsupported-features/es-builtins": "warn",
+    "import/no-extraneous-dependencies": "warn",
+    "node/no-extraneous-import": "warn",
+    "no-console": "warn",
+    "react/jsx-closing-bracket-location": "warn",
+    "react/prop-types": "warn",
+    "react/no-unsafe": "warn",
+    "react/no-string-refs": "warn",
+    "react/no-unescaped-entities": "warn",
+    "react/no-unknown-property": "warn",
+    "react/jsx-no-undef": "warn",
+    "react/jsx-no-leaked-render": "warn",
+    "react/jsx-no-duplicate-props": "warn",
+    "react/display-name": "off",
+    "react/default-props-match-prop-types": "warn",
+    "react/hook-use-state": "warn",
+    "react/jsx-closing-tag-location": "warn",
+    "react/no-unused-prop-types": "warn",
+    "react/boolean-prop-naming": "warn",
+    "react/require-optimization": "warn",
+    "react/jsx-uses-react": "warn",
+    "react/react-in-jsx-scope": "off",
+    "react-hooks/exhaustive-deps": "warn",
+    "jsx-a11y/click-events-have-key-events": "warn",
+    "jsx-a11y/interactive-supports-focus": "warn",
+    "jsx-a11y/alt-text": "warn",
+    "node/no-unpublished-import": "warn",
+    "prettier/prettier": "off",
+    "no-unused-vars": "warn",
+    "unused-imports/no-unused-vars": "warn",
+    "unused-imports/no-unused-imports": "warn",
+    "import/namespace": "off",
+    "import/named": "off",
+    "import/order": [
+      "warn",
+      {
+        "groups": [
+          "type",
+          "builtin",
+          "object",
+          "external",
+          "internal",
+          "parent",
+          "sibling",
+          "index"
+        ],
+        "pathGroups": [
+          {
+            "pattern": "~/**",
+            "group": "external",
+            "position": "after"
+          }
+        ],
+        "newlines-between": "always"
+      }
+    ],
+    "import/no-unresolved": "warn",
+
+    "import/default": "warn",
+    "import/export": "warn",
+    "node/no-unsupported-features/es-syntax": [
+      "off",
+      {
+        "version": ">=8.0.0",
+        "ignores": []
+      }
+    ],
+    "node/no-deprecated-api": "warn",
+    "node/no-missing-require": "warn",
+    "node/no-missing-import": "warn",
+    "react/self-closing-comp": "warn",
+    "react/jsx-sort-props": [
+      "warn",
+      {
+        "callbacksLast": true,
+        "shorthandFirst": true,
+        "noSortAlphabetically": false,
+        "reservedFirst": true
+      }
+    ],
+    "padding-line-between-statements": [
+      "warn",
+      { "blankLine": "always", "prev": "*", "next": "return" },
+      { "blankLine": "always", "prev": ["const", "let", "var"], "next": "*" },
+      {
+        "blankLine": "any",
+        "prev": ["const", "let", "var"],
+        "next": ["const", "let", "var"]
+      }
+    ]
+  }
+}

@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="600" viewBox="0 0 800 600">
+  <style>
+    .text { font-family: system-ui, -apple-system, sans-serif; }
+    @media (prefers-color-scheme: dark) {
+      .primary { fill: #006FEE; }
+      .secondary { fill: #888; }
+    }
+    @media (prefers-color-scheme: light) {
+      .primary { fill: #0072F5; }
+      .secondary { fill: #666; }
+    }
+  </style>
+  
+  <!-- Background Pattern -->
+  <path fill="#f0f0f0" d="M0 0h800v600H0z"/>
+  <circle class="primary" opacity=".1" cx="400" cy="300" r="250"/>
+  <circle class="primary" opacity=".05" cx="400" cy="300" r="350"/>
+  
+  <!-- 404 Text -->
+  <g transform="translate(200, 250)">
+    <text class="text primary" font-size="150" font-weight="bold">
+      <tspan x="0" y="0">404</tspan>
+    </text>
+    <path class="secondary" opacity=".2" d="M50 20h300v5H50z"/>
+  </g>
+  
+  <!-- Decorative Elements -->
+  <g class="primary" opacity=".7">
+    <circle cx="150" cy="150" r="5"/>
+    <circle cx="650" cy="450" r="5"/>
+    <circle cx="700" cy="150" r="3"/>
+    <circle cx="100" cy="450" r="3"/>
+  </g>
+  
+  <!-- Abstract Shapes -->
+  <g class="primary" opacity=".1">
+    <path d="M600 100l20 20-20 20-20-20z"/>
+    <path d="M200 500l20 20-20 20-20-20z"/>
+    <path d="M700 300l15 15-15 15-15-15z"/>
+    <path d="M100 200l15 15-15 15-15-15z"/>
+  </g>
+</svg> 

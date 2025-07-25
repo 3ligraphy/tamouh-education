@@ -1,0 +1,418 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+generator client {
+    provider = "prisma-client-js"
+}
+
+datasource db {
+    provider = "mongodb"
+    url      = env("DATABASE_URL")
+}
+
+model Course {
+    id                 String              @id @default(auto()) @map("_id") @db.ObjectId
+    c_ID               Int                 @unique
+    instructorIds      String[]            @db.ObjectId
+    instructors        Instructor[]        @relation(fields: [instructorIds], references: [id])
+    ownerId            String              @db.ObjectId
+    owner              Instructor          @relation("OwnedCourses", fields: [ownerId], references: [id])
+    courseType         StudentType
+    courseLanguage     String?             @default("Arabic")
+    courseLevel        courseLevel         @default(BEGINNER)
+    courseTimezone     String?
+    courseTotalMinutes Int?
+    courseStart        DateTime?
+    courseEnd          DateTime?
+    price              Int                 @default(0)
+    translations       Translation[]
+    thumbnailUrl       String?
+    overviewVideoId    String?
+    newCourse          Boolean             @default(true)
+    isShown            Boolean             @default(true)
+    isDraft            Boolean             @default(false)
+    Review             Review[]
+    units              Unit[]
+    userFavorites      UserFavorite[]
+    courseProgress     CourseProgress[]
+    category           Category?           @relation(fields: [categoryId], references: [id])
+    categoryId         String?             @db.ObjectId
+    permissions        CoursePermission[]
+    enrolledStudentIds String[]            @db.ObjectId
+    enrolledStudents   User[]              @relation("EnrolledCourses", fields: [enrolledStudentIds], references: [id])
+    createdAt          DateTime?           @default(now())
+    updatedAt          DateTime?           @updatedAt
+    updatedById        String?             @db.ObjectId
+    updatedBy          User?               @relation("UpdatedCourses", fields: [updatedById], references: [id])
+    WalletTransaction  WalletTransaction[]
+    courseTransactions CourseTransaction[]
+
+    @@index([newCourse, isShown, thumbnailUrl, categoryId])
+    @@map("courses")
+}
+
+model CourseTransaction {
+    id                  String            @id @default(auto()) @map("_id") @db.ObjectId
+    courseId            String            @db.ObjectId
+    course              Course            @relation(fields: [courseId], references: [id])
+    userId              String            @db.ObjectId
+    user                User              @relation(fields: [userId], references: [id])
+    walletTransactionId String            @unique @db.ObjectId
+    walletTransaction   WalletTransaction @relation(fields: [walletTransactionId], references: [id])
+    purchasePrice       Float // Store the price at time of purchase
+    status              TransactionStatus @default(PENDING)
+    validUntil          DateTime? // Optional field for time-limited access
+    notes               String?
+    createdAt           DateTime          @default(now())
+    updatedAt           DateTime          @updatedAt
+
+    @@map("course_transactions")
+}
+
+model CourseProgress {
+    id               String   @id @default(auto()) @map("_id") @db.ObjectId
+    userId           String   @db.ObjectId
+    user             User     @relation(fields: [userId], references: [id])
+    courseId         String   @db.ObjectId
+    course           Course   @relation(fields: [courseId], references: [id])
+    currentUnitId    String?  @db.ObjectId
+    currentUnit      Unit?    @relation("CurrentUnit", fields: [currentUnitId], references: [id], onDelete: SetNull)
+    currentLessonId  String?  @db.ObjectId
+    currentLesson    Lesson?  @relation("CurrentLesson", fields: [currentLessonId], references: [id], onDelete: SetNull)
+    completedUnits   String[] @db.ObjectId
+    completedLessons String[] @db.ObjectId
+    progress         Float    @default(0)
+    completed        Boolean  @default(false)
+    lastAccessed     DateTime @default(now())
+    createdAt        DateTime @default(now())
+    updatedAt        DateTime @updatedAt
+
+    @@unique([userId, courseId])
+    @@map("course_progress")
+}
+
+model Unit {
+    id              String           @id @default(auto()) @map("_id") @db.ObjectId
+    courseId        String           @db.ObjectId
+    course          Course           @relation(fields: [courseId], references: [id], onDelete: Cascade)
+    order           Int
+    isVisible       Boolean          @default(true)
+    lessons         Lesson[]
+    translations    Translation[]
+    currentProgress CourseProgress[] @relation("CurrentUnit")
+    createdAt       DateTime         @default(now())
+    updatedAt       DateTime         @updatedAt
+
+    @@map("units")
+}
+
+model UserFavorite {
+    id        String   @id @default(auto()) @map("_id") @db.ObjectId
+    userId    String   @db.ObjectId
+    user      User     @relation(fields: [userId], references: [id])
+    courseId  String   @db.ObjectId
+    course    Course   @relation(fields: [courseId], references: [id])
+    createdAt DateTime @default(now())
+
+    @@unique([userId, courseId])
+    @@map("user_favorites")
+}
+
+model Lesson {
+    id              String           @id @default(auto()) @map("_id") @db.ObjectId
+    unitId          String           @db.ObjectId
+    unit            Unit             @relation(fields: [unitId], references: [id], onDelete: Cascade)
+    order           Int
+    videoId         String?
+    pdfUrl          String[]
+    isVisible       Boolean          @default(true)
+    translations    Translation[]
+    currentProgress CourseProgress[] @relation("CurrentLesson")
+    createdAt       DateTime         @default(now())
+    updatedAt       DateTime         @updatedAt
+
+    @@map("lessons")
+}
+
+model Wallet {
+    id           String              @id @default(auto()) @map("_id") @db.ObjectId
+    userId       String              @unique @db.ObjectId
+    user         User                @relation(fields: [userId], references: [id], onDelete: Cascade)
+    balance      Float               @default(0)
+    transactions WalletTransaction[]
+    createdAt    DateTime            @default(now())
+    updatedAt    DateTime            @updatedAt
+
+    @@map("wallets")
+}
+
+model WalletTransaction {
+    id                String             @id @default(auto()) @map("_id") @db.ObjectId
+    walletId          String             @db.ObjectId
+    wallet            Wallet             @relation(fields: [walletId], references: [id], onDelete: Cascade)
+    amount            Float
+    type              TransactionType
+    status            TransactionStatus  @default(PENDING)
+    courseId          String?            @db.ObjectId // For course purchase transactions
+    course            Course?            @relation(fields: [courseId], references: [id])
+    courseTransaction CourseTransaction?
+    invoiceUrl        String? // For credit purchase transactions
+    notes             String?
+    createdAt         DateTime           @default(now())
+    updatedAt         DateTime           @updatedAt
+
+    @@map("wallet_transactions")
+}
+
+model Session {
+    id           String   @id @default(auto()) @map("_id") @db.ObjectId
+    sessionToken String   @unique
+    userId       String   @db.ObjectId
+    expires      DateTime
+    user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model VerificationToken {
+    id         String   @id @default(auto()) @map("_id") @db.ObjectId
+    identifier String
+    token      String   @unique
+    expires    DateTime
+
+    @@unique([identifier, token])
+    @@map("verificationtokens")
+}
+
+model ActiveSession {
+    id             String   @id @default(auto()) @map("_id") @db.ObjectId
+    userId         String   @db.ObjectId
+    user           User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+    visitorId      String // FingerprintJS visitor ID
+    deviceName     String? // Browser/device info
+    deviceLocation String? // Location info
+    lastActive     DateTime @default(now())
+    createdAt      DateTime @default(now())
+    updatedAt      DateTime @updatedAt
+
+    @@unique([userId, visitorId])
+    @@map("active_sessions")
+}
+
+model User {
+    id                 String              @id @default(auto()) @map("_id") @db.ObjectId
+    name               String?
+    password           String?
+    email              String?             @unique
+    phone              String?             @unique
+    emailVerified      DateTime?           @default(now()) @map("email_verified")
+    image              String?
+    role               UserRole            @default(USER)
+    studentType        StudentType?
+    accounts           Account[]
+    accountStatus      AccountStatus       @default(ACTIVE)
+    sessions           Session[]
+    favorites          UserFavorite[]
+    courseProgress     CourseProgress[]
+    wallet             Wallet?
+    resetToken         String?
+    resetTokenExpires  DateTime?
+    Review             Review[]
+    instructor         Instructor?
+    enrolledCourses    Course[]            @relation("EnrolledCourses", fields: [enrolledCourseIds], references: [id])
+    enrolledCourseIds  String[]            @db.ObjectId
+    updatedCourses     Course[]            @relation("UpdatedCourses")
+    courseTransactions CourseTransaction[]
+    createdAt          DateTime?           @default(now())
+    updatedAt          DateTime?           @updatedAt
+    activeSessions     ActiveSession[]
+
+    @@map("users")
+}
+
+model Account {
+    id                       String  @id @default(auto()) @map("_id") @db.ObjectId
+    userId                   String  @db.ObjectId
+    type                     String
+    provider                 String
+    providerAccountId        String
+    refresh_token            String? // @db.Text
+    access_token             String? // @db.Text
+    expires_at               Int?
+    token_type               String?
+    scope                    String?
+    id_token                 String? // @db.Text
+    session_state            String?
+    user                     User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+    refresh_token_expires_in Int?
+
+    @@unique([provider, providerAccountId])
+}
+
+model Instructor {
+    id                String                @id @default(auto()) @map("_id") @db.ObjectId
+    userId            String                @unique @db.ObjectId // One-to-one relation with User
+    user              User                  @relation(fields: [userId], references: [id], onDelete: Cascade)
+    translations      Translation[]
+    address           String?
+    courseIds         String[]              @db.ObjectId
+    courses           Course[]              @relation(fields: [courseIds], references: [id])
+    ownedCourses      Course[]              @relation("OwnedCourses")
+    permissions       InstructorPermission?
+    coursePermissions CoursePermission[]
+    createdAt         DateTime?             @default(now())
+    updatedAt         DateTime?             @updatedAt
+
+    @@map("instructors")
+}
+
+model InstructorPermission {
+    id               String     @id @default(auto()) @map("_id") @db.ObjectId
+    instructorId     String     @unique @db.ObjectId
+    instructor       Instructor @relation(fields: [instructorId], references: [id], onDelete: Cascade)
+    canCreateCourses Boolean    @default(false)
+    createdAt        DateTime   @default(now())
+    updatedAt        DateTime   @updatedAt
+
+    @@map("instructor_permissions")
+}
+
+model CoursePermission {
+    id           String     @id @default(auto()) @map("_id") @db.ObjectId
+    instructorId String     @db.ObjectId
+    instructor   Instructor @relation(fields: [instructorId], references: [id], onDelete: Cascade)
+    courseId     String     @db.ObjectId
+    course       Course     @relation(fields: [courseId], references: [id], onDelete: Cascade)
+    canUpdate    Boolean    @default(false)
+    canDelete    Boolean    @default(false)
+    createdAt    DateTime   @default(now())
+    updatedAt    DateTime   @updatedAt
+
+    @@unique([instructorId, courseId])
+    @@map("course_permissions")
+}
+
+model Review {
+    id        String    @id @default(auto()) @map("_id") @db.ObjectId
+    userId    String    @db.ObjectId
+    user      User      @relation(fields: [userId], references: [id])
+    courseId  String    @db.ObjectId
+    course    Course    @relation(fields: [courseId], references: [id])
+    rating    Int
+    comment   String?
+    createdAt DateTime? @default(now())
+    updatedAt DateTime? @updatedAt
+
+    @@map("reviews")
+}
+
+model Category {
+    id           String        @id @default(auto()) @map("_id") @db.ObjectId
+    translations Translation[]
+    image        String        @default("/logo.svg")
+    courses      Course[]
+    createdAt    DateTime?     @default(now())
+    updatedAt    DateTime?     @updatedAt
+
+    @@map("categories")
+}
+
+model Translation {
+    id       String   @id @default(auto()) @map("_id") @db.ObjectId
+    language Language @default(ar)
+
+    // Course translations
+    courseTitle       String?
+    courseDescription String?
+    courseBrief       String?
+    learningPoints    String[]
+    targetAudience    String[]
+    requirements      String[]
+    course            Course?  @relation(fields: [courseId], references: [id])
+    courseId          String?  @db.ObjectId
+
+    // Instructor translations
+    instructorBio      String?
+    instructorName     String?
+    instructorJobTitle String?
+    instructor         Instructor? @relation(fields: [instructorId], references: [id])
+    instructorId       String?     @db.ObjectId
+
+    // Category translations
+    categoryName String?
+    category     Category? @relation(fields: [categoryId], references: [id])
+    categoryId   String?   @db.ObjectId
+
+    // Lesson translations
+    lessonTitle       String?
+    lessonDescription String?
+    lesson            Lesson? @relation(fields: [lessonId], references: [id])
+    lessonId          String? @db.ObjectId
+
+    // Unit translations
+    unitTitle       String?
+    unitDescription String?
+    unit            Unit?   @relation(fields: [unitId], references: [id], onDelete: Cascade)
+    unitId          String? @db.ObjectId
+
+    // Specialist translations
+    specialistName  String?
+    specialistTitle String?
+    specialist      Specialist? @relation(fields: [specialistId], references: [id])
+    specialistId    String?     @db.ObjectId
+
+    createdAt DateTime? @default(now())
+    updatedAt DateTime? @updatedAt
+
+    @@map("translations")
+}
+
+model Specialist {
+    id           String        @id @default(auto()) @map("_id") @db.ObjectId
+    translations Translation[]
+    image        String
+    order        Int           @default(0)
+    createdAt    DateTime      @default(now())
+    updatedAt    DateTime      @updatedAt
+
+    @@map("specialists")
+}
+
+enum UserRole {
+    ADMIN
+    SUBSCRIBER
+    INSTRUCTOR
+    USER
+}
+
+enum AccountStatus {
+    ACTIVE
+    DISABLED
+}
+
+enum TransactionType {
+    CREDIT_PURCHASE
+    COURSE_PURCHASE
+    CREDIT_ADJUSTMENT // For admin adjustments
+    REFUND
+}
+
+enum TransactionStatus {
+    PENDING
+    COMPLETED
+    FAILED
+    CANCELLED
+}
+
+enum StudentType {
+    UNIVERSITY_STUDENT
+    SCHOOL_STUDENT
+}
+
+enum Language {
+    ar
+    en
+}
+
+enum courseLevel {
+    BEGINNER
+    INTERMEDIATE
+    ADVANCED
+}
