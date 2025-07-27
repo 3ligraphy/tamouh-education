@@ -39,6 +39,7 @@ model Course {
     permissions        CoursePermission[]
     enrolledStudentIds String[]            @db.ObjectId
     enrolledStudents   User[]              @relation("EnrolledCourses", fields: [enrolledStudentIds], references: [id])
+    certificates       Certificate[]
     createdAt          DateTime?           @default(now())
     updatedAt          DateTime?           @updatedAt
     updatedById        String?             @db.ObjectId
@@ -125,12 +126,108 @@ model Lesson {
     videoId         String?
     pdfUrl          String[]
     isVisible       Boolean          @default(true)
+    hasQuiz         Boolean          @default(false)
+    quiz            Quiz?
     translations    Translation[]
     currentProgress CourseProgress[] @relation("CurrentLesson")
+    videoCompletions VideoCompletion[]
     createdAt       DateTime         @default(now())
     updatedAt       DateTime         @updatedAt
 
     @@map("lessons")
+}
+
+model Quiz {
+    id          String         @id @default(auto()) @map("_id") @db.ObjectId
+    lessonId    String         @unique @db.ObjectId
+    lesson      Lesson         @relation(fields: [lessonId], references: [id], onDelete: Cascade)
+    isEnabled   Boolean        @default(true)
+    timeLimit   Int?           // Time limit in minutes, null for no limit
+    passingScore Int           @default(70) // Percentage required to pass
+    questions   QuizQuestion[]
+    submissions QuizSubmission[]
+    createdAt   DateTime       @default(now())
+    updatedAt   DateTime       @updatedAt
+
+    @@map("quizzes")
+}
+
+model QuizQuestion {
+    id            String         @id @default(auto()) @map("_id") @db.ObjectId
+    quizId        String         @db.ObjectId
+    quiz          Quiz           @relation(fields: [quizId], references: [id], onDelete: Cascade)
+    order         Int
+    type          QuestionType
+    points        Int            @default(1)
+    translations  Translation[]
+    options       QuizOption[]
+    createdAt     DateTime       @default(now())
+    updatedAt     DateTime       @updatedAt
+
+    @@map("quiz_questions")
+}
+
+model QuizOption {
+    id         String         @id @default(auto()) @map("_id") @db.ObjectId
+    questionId String         @db.ObjectId
+    question   QuizQuestion   @relation(fields: [questionId], references: [id], onDelete: Cascade)
+    order      Int
+    isCorrect  Boolean        @default(false)
+    translations Translation[]
+    createdAt  DateTime       @default(now())
+    updatedAt  DateTime       @updatedAt
+
+    @@map("quiz_options")
+}
+
+model QuizSubmission {
+    id          String            @id @default(auto()) @map("_id") @db.ObjectId
+    quizId      String            @db.ObjectId
+    quiz        Quiz              @relation(fields: [quizId], references: [id], onDelete: Cascade)
+    userId      String            @db.ObjectId
+    user        User              @relation(fields: [userId], references: [id], onDelete: Cascade)
+    score       Float             // Percentage score
+    passed      Boolean
+    answers     QuizAnswer[]
+    completedAt DateTime          @default(now())
+    timeTaken   Int?              // Time taken in seconds
+    attempt     Int               @default(1)
+    createdAt   DateTime          @default(now())
+
+    @@unique([quizId, userId, attempt])
+    @@map("quiz_submissions")
+}
+
+model QuizAnswer {
+    id           String         @id @default(auto()) @map("_id") @db.ObjectId
+    submissionId String         @db.ObjectId
+    submission   QuizSubmission @relation(fields: [submissionId], references: [id], onDelete: Cascade)
+    questionId   String         @db.ObjectId
+    selectedOptions String[]    @db.ObjectId // For multiple choice questions
+    textAnswer   String?        // For text/essay questions
+    isCorrect    Boolean
+    points       Float
+
+    @@map("quiz_answers")
+}
+
+model VideoCompletion {
+    id               String   @id @default(auto()) @map("_id") @db.ObjectId
+    userId           String   @db.ObjectId
+    user             User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+    lessonId         String   @db.ObjectId
+    lesson           Lesson   @relation(fields: [lessonId], references: [id], onDelete: Cascade)
+    completed        Boolean  @default(false)
+    watchTime        Int      @default(0) // Time watched in seconds
+    totalTime        Int?     // Total video duration in seconds
+    completionRate   Float    @default(0) // Percentage of video watched
+    lastPosition     Int      @default(0) // Last playback position in seconds
+    completedAt      DateTime?
+    createdAt        DateTime @default(now())
+    updatedAt        DateTime @updatedAt
+
+    @@unique([userId, lessonId])
+    @@map("video_completions")
 }
 
 model Wallet {
@@ -197,32 +294,33 @@ model ActiveSession {
 }
 
 model User {
-    id                 String              @id @default(auto()) @map("_id") @db.ObjectId
-    name               String?
-    password           String?
-    email              String?             @unique
-    phone              String?             @unique
-    emailVerified      DateTime?           @default(now()) @map("email_verified")
-    image              String?
-    role               UserRole            @default(USER)
-    studentType        StudentType?
-    accounts           Account[]
-    accountStatus      AccountStatus       @default(ACTIVE)
-    sessions           Session[]
-    favorites          UserFavorite[]
-    courseProgress     CourseProgress[]
-    wallet             Wallet?
-    resetToken         String?
-    resetTokenExpires  DateTime?
-    Review             Review[]
-    instructor         Instructor?
-    enrolledCourses    Course[]            @relation("EnrolledCourses", fields: [enrolledCourseIds], references: [id])
-    enrolledCourseIds  String[]            @db.ObjectId
-    updatedCourses     Course[]            @relation("UpdatedCourses")
-    courseTransactions CourseTransaction[]
-    createdAt          DateTime?           @default(now())
-    updatedAt          DateTime?           @updatedAt
-    activeSessions     ActiveSession[]
+    id                        String               @id @default(auto()) @map("_id") @db.ObjectId
+    email                     String               @unique
+    password                  String?
+    name                      String?
+    phone                     String?
+    role                      UserRole             @default(USER)
+    studentType               StudentType?
+    accountStatus             AccountStatus        @default(ACTIVE)
+    emailVerified             DateTime?
+    image                     String?
+    accounts                  Account[]
+    sessions                  Session[]
+    instructor                Instructor?
+    enrolledCourseIds         String[]             @db.ObjectId
+    enrolledCourses           Course[]             @relation("EnrolledCourses", fields: [enrolledCourseIds], references: [id])
+    updatedCourses            Course[]             @relation("UpdatedCourses")
+    userFavorites             UserFavorite[]
+    courseProgress            CourseProgress[]
+    wallet                    Wallet?
+    courseTransactions        CourseTransaction[]
+    quizSubmissions           QuizSubmission[]
+    videoCompletions          VideoCompletion[]
+    certificates              Certificate[]
+    reviews                   Review[]
+    activeSessions            ActiveSession[]
+    createdAt                 DateTime             @default(now())
+    updatedAt                 DateTime             @updatedAt
 
     @@map("users")
 }
@@ -358,6 +456,17 @@ model Translation {
     specialist      Specialist? @relation(fields: [specialistId], references: [id])
     specialistId    String?     @db.ObjectId
 
+    // Quiz question translations
+    questionText     String?
+    questionExplanation String?
+    quizQuestion     QuizQuestion? @relation(fields: [quizQuestionId], references: [id])
+    quizQuestionId   String?       @db.ObjectId
+
+    // Quiz option translations
+    optionText    String?
+    quizOption    QuizOption? @relation(fields: [quizOptionId], references: [id])
+    quizOptionId  String?     @db.ObjectId
+
     createdAt DateTime? @default(now())
     updatedAt DateTime? @updatedAt
 
@@ -373,6 +482,23 @@ model Specialist {
     updatedAt    DateTime      @updatedAt
 
     @@map("specialists")
+}
+
+model Certificate {
+    id              String   @id @default(auto()) @map("_id") @db.ObjectId
+    userId          String   @db.ObjectId
+    user            User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+    courseId        String   @db.ObjectId
+    course          Course   @relation(fields: [courseId], references: [id], onDelete: Cascade)
+    certificateUrl  String   // URL to the PDF certificate file
+    certificateCode String   @unique // Unique verification code
+    completedAt     DateTime
+    issuedAt        DateTime @default(now())
+    createdAt       DateTime @default(now())
+    updatedAt       DateTime @updatedAt
+
+    @@unique([userId, courseId])
+    @@map("certificates")
 }
 
 enum UserRole {
@@ -415,4 +541,11 @@ enum courseLevel {
     BEGINNER
     INTERMEDIATE
     ADVANCED
+}
+
+enum QuestionType {
+    MULTIPLE_CHOICE
+    SINGLE_CHOICE
+    TRUE_FALSE
+    SHORT_ANSWER
 }

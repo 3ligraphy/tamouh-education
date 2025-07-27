@@ -28,10 +28,14 @@ import {
   Divider,
   Pagination,
   Switch,
+  Chip,
+  Card,
+  CardBody,
+  CardHeader,
 } from "@heroui/react";
 import { toast } from "sonner";
 import { useSession } from "next-auth/react";
-import { Phone, Mail, Upload, Filter } from "lucide-react";
+import { Phone, Mail, Upload, Filter, Award, Download, Eye } from "lucide-react";
 
 import { api } from "@/trpc/react";
 import { EyeIcon } from "@/app/_components/EyeIcon";
@@ -125,6 +129,12 @@ export default function AccountsManagement() {
   } = useDisclosure();
 
   const [showFilters, setShowFilters] = useState(false);
+  const [selectedStudentForCerts, setSelectedStudentForCerts] = useState(null);
+  const { 
+    isOpen: isCertModalOpen, 
+    onOpen: onCertModalOpen, 
+    onClose: onCertModalClose 
+  } = useDisclosure();
 
   useEffect(() => {
     if (status === "loading") return;
@@ -630,6 +640,17 @@ export default function AccountsManagement() {
     }
   };
 
+  // Get student certificates
+  const { data: studentCertData } = api.certificate.getStudentCertificates.useQuery(
+    { studentId: selectedStudentForCerts?.id || "" },
+    { enabled: !!selectedStudentForCerts?.id }
+  );
+
+  const handleViewStudentCertificates = (student) => {
+    setSelectedStudentForCerts(student);
+    onCertModalOpen();
+  };
+
   if (isLoadingUsers) {
     return (
       <div className="flex h-[50vh] items-center justify-center">
@@ -837,6 +858,16 @@ export default function AccountsManagement() {
                         <DeleteIcon className="w-5 h-5" />
                       </button>
                     </Tooltip>
+                    {item.role === "USER" && (
+                      <Tooltip content={t("actions.view_certificates")}>
+                        <button
+                          className="text-gray-400 hover:text-info transition-colors p-1"
+                          onClick={() => handleViewStudentCertificates(item)}
+                        >
+                          <Award className="w-5 h-5" />
+                        </button>
+                      </Tooltip>
+                    )}
                   </div>
                 </TableCell>
               </TableRow>
@@ -1569,6 +1600,176 @@ export default function AccountsManagement() {
               onPress={handleAddSubmit}
             >
               {t("add_account_modal.buttons.add")}
+            </Button>
+          </ModalFooter>
+        </ModalContent>
+      </Modal>
+
+      {/* Student Certificates Modal */}
+      <Modal
+        isOpen={isCertModalOpen}
+        onClose={onCertModalClose}
+        size="5xl"
+        scrollBehavior="inside"
+      >
+        <ModalContent>
+          <ModalHeader>
+            <div className="flex items-center gap-2">
+              <Award className="w-5 h-5 text-yellow-500" />
+              {t("student_certificates")} - {selectedStudentForCerts?.name || selectedStudentForCerts?.email}
+            </div>
+          </ModalHeader>
+          <ModalBody>
+            {studentCertData && (
+              <div className="space-y-6">
+                {/* Student Info */}
+                <Card>
+                  <CardHeader>
+                    <h3 className="text-lg font-semibold">{t("student_information")}</h3>
+                  </CardHeader>
+                  <CardBody>
+                    <div className="grid grid-cols-2 gap-4 text-sm">
+                      <div>
+                        <span className="font-medium">{t("name")}:</span> {studentCertData.student.name}
+                      </div>
+                      <div>
+                        <span className="font-medium">{t("email")}:</span> {studentCertData.student.email}
+                      </div>
+                      <div>
+                        <span className="font-medium">{t("student_type")}:</span> {studentCertData.student.studentType}
+                      </div>
+                      <div>
+                        <span className="font-medium">{t("completed_courses")}:</span> {studentCertData.completedCourses.length}
+                      </div>
+                    </div>
+                  </CardBody>
+                </Card>
+
+                {/* Completed Courses */}
+                <Card>
+                  <CardHeader>
+                    <h3 className="text-lg font-semibold">{t("completed_courses")}</h3>
+                  </CardHeader>
+                  <CardBody>
+                    {studentCertData.completedCourses.length > 0 ? (
+                      <div className="space-y-3">
+                        {studentCertData.completedCourses.map((progress) => {
+                          const courseTitle = progress.course.translations.find(
+                            t => t.language === 'en'
+                          )?.courseTitle;
+                          const hasCertificate = studentCertData.certificates.some(
+                            cert => cert.courseId === progress.courseId
+                          );
+
+                          return (
+                            <div key={progress.id} className="flex items-center justify-between p-3 border rounded-lg">
+                              <div>
+                                <h4 className="font-medium">{courseTitle}</h4>
+                                <p className="text-sm text-gray-600">
+                                  {t("completed_on")}: {new Date(progress.updatedAt).toLocaleDateString()}
+                                </p>
+                                <p className="text-sm text-gray-600">
+                                  {t("progress")}: {Math.round(progress.progress)}%
+                                </p>
+                              </div>
+                              <div className="flex items-center gap-2">
+                                <Chip
+                                  color="success"
+                                  variant="flat"
+                                  size="sm"
+                                >
+                                  {t("completed")}
+                                </Chip>
+                                {hasCertificate && (
+                                  <Chip
+                                    color="warning"
+                                    variant="flat"
+                                    size="sm"
+                                    startContent={<Award className="w-3 h-3" />}
+                                  >
+                                    {t("certified")}
+                                  </Chip>
+                                )}
+                              </div>
+                            </div>
+                          );
+                        })}
+                      </div>
+                    ) : (
+                      <p className="text-gray-600 text-center py-4">
+                        {t("no_completed_courses")}
+                      </p>
+                    )}
+                  </CardBody>
+                </Card>
+
+                {/* Certificates */}
+                <Card>
+                  <CardHeader>
+                    <h3 className="text-lg font-semibold">{t("issued_certificates")}</h3>
+                  </CardHeader>
+                  <CardBody>
+                    {studentCertData.certificates.length > 0 ? (
+                      <div className="space-y-3">
+                        {studentCertData.certificates.map((certificate) => {
+                          const courseTitle = certificate.course.translations.find(
+                            t => t.language === 'en'
+                          )?.courseTitle;
+
+                          return (
+                            <div key={certificate.id} className="flex items-center justify-between p-3 border rounded-lg">
+                              <div>
+                                <h4 className="font-medium">{courseTitle}</h4>
+                                <p className="text-sm text-gray-600">
+                                  {t("issued_on")}: {new Date(certificate.issuedAt).toLocaleDateString()}
+                                </p>
+                                <p className="text-sm text-gray-600">
+                                  {t("certificate_code")}: {certificate.certificateCode}
+                                </p>
+                              </div>
+                              <div className="flex gap-2">
+                                <Button
+                                  size="sm"
+                                  variant="flat"
+                                  onPress={() => window.open(certificate.certificateUrl, '_blank')}
+                                >
+                                  <Eye className="w-4 h-4" />
+                                  {t("view")}
+                                </Button>
+                                <Button
+                                  size="sm"
+                                  color="primary"
+                                  variant="flat"
+                                  onPress={() => {
+                                    const link = document.createElement('a');
+                                    link.href = certificate.certificateUrl;
+                                    link.download = `${courseTitle}_Certificate.pdf`;
+                                    document.body.appendChild(link);
+                                    link.click();
+                                    document.body.removeChild(link);
+                                  }}
+                                >
+                                  <Download className="w-4 h-4" />
+                                  {t("download")}
+                                </Button>
+                              </div>
+                            </div>
+                          );
+                        })}
+                      </div>
+                    ) : (
+                      <p className="text-gray-600 text-center py-4">
+                        {t("no_certificates_issued")}
+                      </p>
+                    )}
+                  </CardBody>
+                </Card>
+              </div>
+            )}
+          </ModalBody>
+          <ModalFooter>
+            <Button color="default" variant="light" onPress={onCertModalClose}>
+              {t("close")}
             </Button>
           </ModalFooter>
         </ModalContent>

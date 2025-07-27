@@ -828,4 +828,28 @@ export const userRouter = createTRPCRouter({
         });
       }
     }),
+
+  // Manually verify user (admin only - for testing)
+  verifyUserEmail: protectedProcedure
+    .input(
+      z.object({
+        userId: z.string(),
+      })
+    )
+    .mutation(async ({ ctx, input }) => {
+      // Check if user is admin
+      if (ctx.session.user.role !== "ADMIN") {
+        throw new TRPCError({
+          code: "FORBIDDEN",
+          message: "Admin access required",
+        });
+      }
+
+      const user = await ctx.prisma.user.update({
+        where: { id: input.userId },
+        data: { emailVerified: new Date() },
+      });
+
+      return { success: true, user };
+    }),
 });

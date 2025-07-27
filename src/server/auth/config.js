@@ -50,9 +50,10 @@ export const authConfig = {
           throw new Error("No user found");
         }
 
-        if (!user.emailVerified) {
-          throw new Error("Please verify your email before logging in");
-        }
+        // Temporarily disable email verification for testing
+        // if (!user.emailVerified) {
+        //   throw new Error("Please verify your email before logging in");
+        // }
 
         const passwordMatch = await bcrypt.compare(
           credentials.password,

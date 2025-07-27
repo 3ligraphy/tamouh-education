@@ -2,7 +2,7 @@
 
 import { useParams } from "next/navigation";
 import { useTranslations } from "next-intl";
-import { Play, Menu, ChevronRight, ChevronLeft } from "lucide-react";
+import { Play, Menu, ChevronRight, ChevronLeft, Lock, CheckCircle } from "lucide-react";
 import Link from "next/link";
 import { Spinner } from "@heroui/spinner";
 import {
@@ -16,9 +16,12 @@ import {
   useDisclosure,
   Tabs,
   Tab,
+  Chip,
+  Tooltip,
 } from "@heroui/react";
 
 import { api } from "@/trpc/react";
+import LessonContentWithQuiz from "@/app/_components/lesson-content-with-quiz";
 
 export default function LessonPage() {
   const params = useParams();
@@ -47,6 +50,66 @@ export default function LessonPage() {
     { videoId: lesson?.videoId ?? "" },
     { enabled: !!lesson?.videoId && isEnrolled }
   );
+
+  // Get completion status for navigation restrictions
+  const { data: videoCompletion } = api.quiz.getVideoCompletion.useQuery(
+    { lessonId: lesson?.id ?? "" },
+    { enabled: !!lesson?.id && isEnrolled }
+  );
+
+  // Get quiz data to check completion
+  const { data: quiz } = api.quiz.getByLessonId.useQuery(
+    { lessonId: lesson?.id ?? "" },
+    { enabled: !!lesson?.hasQuiz && !!lesson?.id }
+  );
+
+  // Get quiz submissions to check if quiz was completed
+  const { data: quizSubmissions } = api.quiz.getSubmissions.useQuery(
+    { quizId: quiz?.id ?? "" },
+    { enabled: !!quiz?.id }
+  );
+
+  // Helper function to check if a lesson is completed
+  const isLessonCompleted = (lessonToCheck) => {
+    if (!currentUser || !lessonToCheck) return false;
+    
+    // For the current lesson, use our real-time data
+    if (lessonToCheck.id === lesson?.id) {
+      const videoCompleted = videoCompletion?.completed || false;
+      const quizCompleted = !lessonToCheck.hasQuiz || 
+        (quizSubmissions && quizSubmissions.length > 0 && quizSubmissions[0].passed);
+      return videoCompleted && quizCompleted;
+    }
+    
+    // For other lessons, we'd need to query their completion status
+    // For now, assume they're accessible (this could be improved with batch queries)
+    return true;
+  };
+
+  // Helper function to check if lesson should be accessible
+  const isLessonAccessible = (lessonToCheck, unitIndex, lessonIndex) => {
+    if (!currentUser || !course) return false;
+    
+    // First lesson is always accessible
+    if (unitIndex === 0 && lessonIndex === 0) return true;
+    
+    // Check if previous lesson is completed
+    const units = course.units;
+    let prevLesson = null;
+    
+    if (lessonIndex > 0) {
+      // Previous lesson in same unit
+      prevLesson = units[unitIndex].lessons[lessonIndex - 1];
+    } else if (unitIndex > 0) {
+      // Last lesson of previous unit
+      const prevUnit = units[unitIndex - 1];
+      prevLesson = prevUnit.lessons[prevUnit.lessons.length - 1];
+    }
+    
+    if (!prevLesson) return true; // First lesson overall
+    
+    return isLessonCompleted(prevLesson);
+  };
 
   if (isLoading) {
     return (
@@ -105,13 +168,16 @@ export default function LessonPage() {
   // Calculate next and previous lessons
   let nextLesson = null;
   let prevLesson = null;
+  let isNextLessonAccessible = false;
 
   if (currentLessonIndex < units[currentUnitIndex].lessons.length - 1) {
     // Next lesson in same unit
     nextLesson = units[currentUnitIndex].lessons[currentLessonIndex + 1];
+    isNextLessonAccessible = isLessonCompleted(lesson); // Current lesson must be completed
   } else if (currentUnitIndex < units.length - 1) {
     // First lesson of next unit
     nextLesson = units[currentUnitIndex + 1].lessons[0];
+    isNextLessonAccessible = isLessonCompleted(lesson); // Current lesson must be completed
   }
 
   if (currentLessonIndex > 0) {
@@ -120,9 +186,11 @@ export default function LessonPage() {
   } else if (currentUnitIndex > 0) {
     // Last lesson of previous unit
     const prevUnit = units[currentUnitIndex - 1];
-
     prevLesson = prevUnit.lessons[prevUnit.lessons.length - 1];
   }
+
+  // Check if current lesson is completed
+  const currentLessonCompleted = isLessonCompleted(lesson);
 
   return (
     <div className="min-h-screen bg-gray-50" dir={isRTL ? "rtl" : "ltr"}>
@@ -138,6 +206,15 @@ export default function LessonPage() {
             <Menu className="h-6 w-6" />
           </Button>
           <h1 className="text-lg font-medium">{courseTitle}</h1>
+          
+          {/* Progress indicator */}
+          <div className="ml-auto flex items-center gap-2">
+            {currentLessonCompleted && (
+              <Chip color="success" variant="flat" size="sm" startContent={<CheckCircle className="w-3 h-3" />}>
+                {t("completed")}
+              </Chip>
+            )}
+          </div>
         </div>
       </header>
 
@@ -167,29 +244,67 @@ export default function LessonPage() {
                         {t("unit")} {unitIndex + 1}: {unitTitle}
                       </h3>
                       <div className="space-y-2">
-                        {unit.lessons.map((lesson) => {
-                          const lessonTitle = lesson.translations.find(
+                        {unit.lessons.map((lessonItem, lessonIndex) => {
+                          const lessonItemTitle = lessonItem.translations.find(
                             (t) => t.language === params.locale
                           )?.lessonTitle;
 
+                          const isCurrentLesson = lessonItem.id === lesson.id;
+                          const isAccessible = isLessonAccessible(lessonItem, unitIndex, lessonIndex);
+                          const isCompleted = isLessonCompleted(lessonItem);
+
+                          const lessonLink = `/${params.locale}/courses/${encodeURIComponent(courseTitle)}/lesson/${unit.id}/${lessonItem.order}`;
+
                           return (
-                            <Link
-                              key={lesson.id}
-                              href={`/${params.locale}/courses/${encodeURIComponent(courseTitle)}/lesson/${unit.id}/${lesson.order}`}
-                            >
-                              <div
-                                className={`p-3 rounded-lg transition-colors ${
-                                  lesson.id === params.lessonId
-                                    ? "bg-primary/10 text-primary"
-                                    : "hover:bg-gray-100"
-                                }`}
-                              >
-                                <div className="flex items-center gap-3">
-                                  <Play className="w-4 h-4" />
-                                  <span className="text-sm">{lessonTitle}</span>
-                                </div>
-                              </div>
-                            </Link>
+                            <div key={lessonItem.id}>
+                              {isAccessible ? (
+                                <Link href={lessonLink}>
+                                  <div
+                                    className={`p-3 rounded-lg transition-colors ${
+                                      isCurrentLesson
+                                        ? "bg-primary/10 text-primary border border-primary/20"
+                                        : "hover:bg-gray-100"
+                                    }`}
+                                  >
+                                    <div className="flex items-center gap-3">
+                                      <div className="flex items-center gap-2">
+                                        <Play className="w-4 h-4" />
+                                        {isCompleted && <CheckCircle className="w-3 h-3 text-green-500" />}
+                                      </div>
+                                      <span className="text-sm flex-1">{lessonItemTitle}</span>
+                                      {lessonItem.hasQuiz && (
+                                        <Chip size="sm" variant="flat" color="warning">
+                                          Quiz
+                                        </Chip>
+                                      )}
+                                    </div>
+                                  </div>
+                                </Link>
+                              ) : (
+                                <Tooltip 
+                                  content={t("complete_previous_lesson_first")}
+                                  placement="right"
+                                >
+                                  <div
+                                    className={`p-3 rounded-lg transition-colors bg-gray-50 text-gray-400 cursor-not-allowed ${
+                                      isCurrentLesson ? "border border-gray-200" : ""
+                                    }`}
+                                  >
+                                    <div className="flex items-center gap-3">
+                                      <div className="flex items-center gap-2">
+                                        <Lock className="w-4 h-4" />
+                                      </div>
+                                      <span className="text-sm flex-1">{lessonItemTitle}</span>
+                                      {lessonItem.hasQuiz && (
+                                        <Chip size="sm" variant="flat" color="default">
+                                          Quiz
+                                        </Chip>
+                                      )}
+                                    </div>
+                                  </div>
+                                </Tooltip>
+                              )}
+                            </div>
                           );
                         })}
                       </div>
@@ -204,99 +319,15 @@ export default function LessonPage() {
         {/* Main Content */}
         <div className="flex-1 px-4">
           <div className="max-w-[1200px] mx-auto">
-            {/* Video Player */}
-            <Card className="mb-8">
-              <CardBody className="p-0">
-                <div className="aspect-video bg-black">
-                  {videoData ? (
-                    <iframe
-                      allow="accelerometer;gyroscope;autoplay;encrypted-media;picture-in-picture;"
-                      className="w-full h-full"
-                      src={videoData.url}
-                      title={lessonTitle}
-                    />
-                  ) : (
-                    <div className="w-full h-full flex items-center justify-center text-white">
-                      {t("videoNotAvailable")}
-                    </div>
-                  )}
-                </div>
-              </CardBody>
-            </Card>
-
-            {/* Lesson Info */}
-            {lesson.pdfUrl ? (
-              <Tabs
-                aria-label="Lesson content"
-                className="mb-8"
-                variant="underlined"
-              >
-                <Tab key="description" title={t("description")}>
-                  <Card>
-                    <CardBody>
-                      <h1 className="text-2xl font-bold mb-4">{lessonTitle}</h1>
-                      <p className="text-gray-600">{lessonDescription}</p>
-                    </CardBody>
-                  </Card>
-                </Tab>
-                <Tab key="materials" title={t("materials")}>
-                  <Card>
-                    <CardBody>
-                      {lesson.pdfUrl && lesson.pdfUrl.length > 0 ? (
-                        <div className="space-y-8">
-                          {lesson.pdfUrl.map((url, index) => (
-                            <div key={index} className="space-y-4">
-                              <div className="flex gap-4 items-center">
-                                <h3 className="text-lg font-medium">
-                                  {t("material")} {index + 1}
-                                </h3>
-                                <div className="flex gap-2">
-                                  <Button
-                                    as="a"
-                                    color="primary"
-                                    href={url}
-                                    rel="noopener noreferrer"
-                                    target="_blank"
-                                    variant="flat"
-                                  >
-                                    {t("viewPdf")}
-                                  </Button>
-                                  <Button
-                                    download
-                                    as="a"
-                                    color="primary"
-                                    href={url}
-                                  >
-                                    {t("downloadPdf")}
-                                  </Button>
-                                </div>
-                              </div>
-                              <iframe
-                                className="w-full h-[600px]"
-                                src={url}
-                                title={`${lessonTitle} - PDF ${index + 1}`}
-                              />
-                            </div>
-                          ))}
-                        </div>
-                      ) : (
-                        <div className="text-center py-8 text-gray-600">
-                          {t("noMaterialsAvailable")}
-                        </div>
-                      )}
-                    </CardBody>
-                  </Card>
-                </Tab>
-              </Tabs>
-            ) : (
-              <div className="mb-8">
-                <h1 className="text-2xl font-bold mb-4">{lessonTitle}</h1>
-                <p className="text-gray-600">{lessonDescription}</p>
-              </div>
-            )}
+            {/* Integrated Lesson Content with Quiz */}
+            <LessonContentWithQuiz
+              lesson={lesson}
+              videoData={videoData}
+              locale={params.locale}
+            />
 
             {/* Navigation */}
-            <div className="flex justify-between items-center">
+            <div className="flex justify-between items-center mt-8">
               {prevLesson ? (
                 <Link
                   href={`/${params.locale}/courses/${encodeURIComponent(
@@ -316,20 +347,57 @@ export default function LessonPage() {
               )}
 
               {nextLesson ? (
-                <Link
-                  href={`/${params.locale}/courses/${encodeURIComponent(
-                    courseTitle
-                  )}/lesson/${nextLesson.unitId}/${nextLesson.order}`}
-                >
-                  <Button className="flex items-center gap-2" color="primary">
-                    {t("nextLesson")}
-                    {isRTL ? <ChevronLeft /> : <ChevronRight />}
-                  </Button>
-                </Link>
+                isNextLessonAccessible ? (
+                  <Link
+                    href={`/${params.locale}/courses/${encodeURIComponent(
+                      courseTitle
+                    )}/lesson/${nextLesson.unitId}/${nextLesson.order}`}
+                  >
+                    <Button className="flex items-center gap-2" color="primary">
+                      {t("nextLesson")}
+                      {isRTL ? <ChevronLeft /> : <ChevronRight />}
+                    </Button>
+                  </Link>
+                ) : (
+                  <Tooltip content={t("complete_current_lesson_first")}>
+                    <Button 
+                      className="flex items-center gap-2" 
+                      color="default"
+                      variant="bordered"
+                      isDisabled
+                    >
+                      <Lock className="w-4 h-4" />
+                      {t("nextLesson")}
+                      {isRTL ? <ChevronLeft /> : <ChevronRight />}
+                    </Button>
+                  </Tooltip>
+                )
               ) : (
                 <div />
               )}
             </div>
+
+            {/* Completion reminder */}
+            {!currentLessonCompleted && (
+              <Card className="mt-6 border-blue-200 bg-blue-50">
+                <CardBody>
+                  <div className="flex items-start gap-3">
+                    <div className="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center flex-shrink-0">
+                      <CheckCircle className="w-4 h-4 text-blue-600" />
+                    </div>
+                    <div>
+                      <h3 className="font-semibold text-blue-800 mb-1">{t("complete_lesson_to_continue")}</h3>
+                      <p className="text-sm text-blue-700">
+                        {lesson.hasQuiz 
+                          ? t("watch_video_and_pass_quiz_to_unlock_next")
+                          : t("watch_80_percent_video_to_unlock_next")
+                        }
+                      </p>
+                    </div>
+                  </div>
+                </CardBody>
+              </Card>
+            )}
           </div>
         </div>
       </div>

@@ -1084,6 +1084,22 @@ export const courseRouter = createTRPCRouter({
           lessons: {
             include: {
               translations: true,
+              quiz: {
+                include: {
+                  questions: {
+                    include: {
+                      translations: true,
+                      options: {
+                        include: {
+                          translations: true,
+                        },
+                        orderBy: { order: "asc" },
+                      },
+                    },
+                    orderBy: { order: "asc" },
+                  },
+                },
+              },
             },
             orderBy: {
               order: "asc",
@@ -1666,6 +1682,22 @@ export const courseRouter = createTRPCRouter({
         },
         include: {
           translations: true,
+          quiz: {
+            include: {
+              questions: {
+                include: {
+                  translations: true,
+                  options: {
+                    include: {
+                      translations: true,
+                    },
+                    orderBy: { order: "asc" },
+                  },
+                },
+                orderBy: { order: "asc" },
+              },
+            },
+          },
           unit: {
             include: {
               translations: true,
@@ -2268,5 +2300,204 @@ export const courseRouter = createTRPCRouter({
       });
 
       return { success: true };
+    }),
+
+  // Update course progress when lesson is completed
+  updateCourseProgress: protectedProcedure
+    .input(
+      z.object({
+        courseId: z.string(),
+        lessonId: z.string(),
+        completed: z.boolean().default(true),
+      })
+    )
+    .mutation(async ({ ctx, input }) => {
+      const { courseId, lessonId, completed } = input;
+      const userId = ctx.session.user.id;
+
+      // Check if user is enrolled
+      const course = await ctx.prisma.course.findUnique({
+        where: { id: courseId },
+        include: {
+          units: {
+            include: {
+              lessons: {
+                include: {
+                  quiz: true,
+                  videoCompletions: {
+                    where: { userId },
+                  },
+                },
+              },
+            },
+          },
+        },
+      });
+
+      if (!course) {
+        throw new TRPCError({
+          code: "NOT_FOUND",
+          message: "Course not found",
+        });
+      }
+
+      if (!course.enrolledStudentIds.includes(userId)) {
+        throw new TRPCError({
+          code: "FORBIDDEN",
+          message: "You are not enrolled in this course",
+        });
+      }
+
+      // Find the lesson and unit
+      let targetLesson = null;
+      let targetUnit = null;
+      let targetUnitIndex = -1;
+      let targetLessonIndex = -1;
+
+      for (let unitIndex = 0; unitIndex < course.units.length; unitIndex++) {
+        const unit = course.units[unitIndex];
+        for (let lessonIndex = 0; lessonIndex < unit.lessons.length; lessonIndex++) {
+          if (unit.lessons[lessonIndex].id === lessonId) {
+            targetLesson = unit.lessons[lessonIndex];
+            targetUnit = unit;
+            targetUnitIndex = unitIndex;
+            targetLessonIndex = lessonIndex;
+            break;
+          }
+        }
+        if (targetLesson) break;
+      }
+
+      if (!targetLesson) {
+        throw new TRPCError({
+          code: "NOT_FOUND",
+          message: "Lesson not found in this course",
+        });
+      }
+
+      // Check if lesson is actually completed
+      const videoCompletion = targetLesson.videoCompletions[0];
+      const videoCompleted = videoCompletion?.completed || false;
+      
+      let quizCompleted = true; // Default if no quiz
+      if (targetLesson.hasQuiz && targetLesson.quiz) {
+        const quizSubmissions = await ctx.prisma.quizSubmission.findMany({
+          where: {
+            quizId: targetLesson.quiz.id,
+            userId,
+          },
+          orderBy: { attempt: "desc" },
+          take: 1,
+        });
+        quizCompleted = quizSubmissions.length > 0 && quizSubmissions[0].passed;
+      }
+
+      const isLessonActuallyCompleted = videoCompleted && quizCompleted;
+
+      if (completed && !isLessonActuallyCompleted) {
+        throw new TRPCError({
+          code: "BAD_REQUEST",
+          message: "Cannot mark lesson as completed: video or quiz not completed",
+        });
+      }
+
+      // Get or create course progress
+      let courseProgress = await ctx.prisma.courseProgress.findUnique({
+        where: {
+          userId_courseId: {
+            userId,
+            courseId,
+          },
+        },
+      });
+
+      if (!courseProgress) {
+        courseProgress = await ctx.prisma.courseProgress.create({
+          data: {
+            userId,
+            courseId,
+            completedLessons: [],
+            completedUnits: [],
+            progress: 0,
+          },
+        });
+      }
+
+      // Update completed lessons
+      let completedLessons = [...courseProgress.completedLessons];
+      if (completed && !completedLessons.includes(lessonId)) {
+        completedLessons.push(lessonId);
+      } else if (!completed && completedLessons.includes(lessonId)) {
+        completedLessons = completedLessons.filter(id => id !== lessonId);
+      }
+
+      // Check if unit is completed (all lessons in unit are completed)
+      let completedUnits = [...courseProgress.completedUnits];
+      const unitLessonIds = targetUnit.lessons.map(l => l.id);
+      const unitCompleted = unitLessonIds.every(id => completedLessons.includes(id));
+      
+      if (unitCompleted && !completedUnits.includes(targetUnit.id)) {
+        completedUnits.push(targetUnit.id);
+      } else if (!unitCompleted && completedUnits.includes(targetUnit.id)) {
+        completedUnits = completedUnits.filter(id => id !== targetUnit.id);
+      }
+
+      // Calculate overall progress
+      const totalLessons = course.units.reduce((total, unit) => total + unit.lessons.length, 0);
+      const progressPercentage = totalLessons > 0 ? (completedLessons.length / totalLessons) * 100 : 0;
+      const courseCompleted = progressPercentage >= 100;
+
+      // Update current lesson and unit
+      const currentLessonId = courseCompleted ? null : lessonId;
+      const currentUnitId = courseCompleted ? null : targetUnit.id;
+
+      // Update course progress
+      const updatedProgress = await ctx.prisma.courseProgress.update({
+        where: {
+          userId_courseId: {
+            userId,
+            courseId,
+          },
+        },
+        data: {
+          completedLessons,
+          completedUnits,
+          progress: progressPercentage,
+          completed: courseCompleted,
+          currentLessonId,
+          currentUnitId,
+          lastAccessed: new Date(),
+        },
+      });
+
+      return {
+        progress: updatedProgress,
+        lessonCompleted: completed,
+        unitCompleted,
+        courseCompleted,
+        progressPercentage,
+      };
+    }),
+
+  // Get user progress for all courses
+  getUserProgress: protectedProcedure
+    .query(async ({ ctx }) => {
+      const progress = await ctx.prisma.courseProgress.findMany({
+        where: {
+          userId: ctx.session.user.id,
+        },
+        include: {
+          course: {
+            include: {
+              translations: true,
+            },
+          },
+        },
+        orderBy: {
+          updatedAt: "desc",
+        },
+      });
+
+      return progress;
     }),
 });

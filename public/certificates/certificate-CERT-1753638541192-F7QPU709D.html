@@ -1,0 +1,203 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Certificate of Completion - Calculus Fundamentals</title>
+    <style>
+        @page {
+            size: A4 landscape;
+            margin: 0;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+            width: 297mm;
+            height: 210mm;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0;
+            padding: 20mm;
+        }
+        
+        .certificate {
+            width: 100%;
+            height: 100%;
+            background: white;
+            border: 8px solid #3b82f6;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 40px;
+        }
+        
+        .certificate::before {
+            content: '';
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            right: 15px;
+            bottom: 15px;
+            border: 2px solid #dbeafe;
+            border-radius: 12px;
+        }
+        
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #3b82f6;
+            margin-bottom: 20px;
+            letter-spacing: 2px;
+        }
+        
+        .title {
+            font-size: 48px;
+            font-weight: bold;
+            color: #3b82f6;
+            margin-bottom: 30px;
+            letter-spacing: 3px;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+        }
+        
+        .subtitle {
+            font-size: 18px;
+            color: #64748b;
+            margin-bottom: 25px;
+        }
+        
+        .name {
+            font-size: 36px;
+            font-weight: bold;
+            color: #1e293b;
+            margin-bottom: 25px;
+            text-decoration: underline;
+            text-decoration-color: #3b82f6;
+            text-underline-offset: 8px;
+        }
+        
+        .completion-text {
+            font-size: 18px;
+            color: #64748b;
+            margin-bottom: 20px;
+        }
+        
+        .course-name {
+            font-size: 28px;
+            font-weight: bold;
+            color: #1e293b;
+            margin-bottom: 30px;
+            font-style: italic;
+        }
+        
+        .date {
+            font-size: 16px;
+            color: #64748b;
+            margin-bottom: 40px;
+        }
+        
+        .footer {
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+            margin-top: auto;
+            padding-top: 30px;
+        }
+        
+        .signature-section {
+            text-align: left;
+        }
+        
+        .code-section {
+            text-align: right;
+        }
+        
+        .footer-label {
+            font-size: 14px;
+            color: #64748b;
+            margin-bottom: 5px;
+        }
+        
+        .footer-value {
+            font-size: 16px;
+            font-weight: bold;
+            color: #1e293b;
+        }
+        
+        .signature-line {
+            width: 150px;
+            height: 1px;
+            background-color: #9ca3af;
+            margin-top: 5px;
+        }
+        
+        .decorative-element {
+            position: absolute;
+            top: 30px;
+            right: 30px;
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(45deg, #3b82f6, #1d4ed8);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        
+        @media print {
+            body {
+                -webkit-print-color-adjust: exact;
+                color-adjust: exact;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="certificate">
+        <div class="decorative-element">🏆</div>
+        
+        <div class="logo">TAMOUH EDUCATION</div>
+        
+        <div class="title">CERTIFICATE OF COMPLETION</div>
+        
+        <div class="subtitle">This is to certify that</div>
+        
+        <div class="name">Khalid Al-Otaibi</div>
+        
+        <div class="completion-text">has successfully completed the course</div>
+        
+        <div class="course-name">"Calculus Fundamentals"</div>
+        
+        <div class="date">Completed on: July 27, 2025</div>
+        
+        <div class="footer">
+            <div class="signature-section">
+                <div class="footer-label">Instructor:</div>
+                <div class="footer-value">Dr. Abdullah Al-Sabah</div>
+                <div class="signature-line"></div>
+            </div>
+            
+            <div class="code-section">
+                <div class="footer-label">Certificate Code:</div>
+                <div class="footer-value">CERT-1753638541192-F7QPU709D</div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -15,6 +15,9 @@ import {
   Spinner,
   Tooltip,
   Progress,
+  Tabs,
+  Tab,
+  Divider,
 } from "@heroui/react";
 import { useTranslations } from "next-intl";
 import {
@@ -38,11 +41,13 @@ import {
   ArrowsUpDownIcon,
   TrashIcon,
   VideoCameraIcon,
+  AcademicCapIcon,
 } from "@heroicons/react/24/outline";
 import { IoCloudUploadOutline } from "react-icons/io5";
 import { toast } from "sonner";
 
 import { EditIcon } from "./EditIcon";
+import QuizManagement from "./quiz-management";
 
 import { useFileUpload } from "@/app/_hooks/useFileUpload";
 import { api } from "@/trpc/react";
@@ -179,12 +184,20 @@ function SortableLesson({ lesson, onEdit, onDelete }) {
                   ?.lessonTitle
               }
             </span>
-            {lesson.videoId ? (
-              <span className="text-xs text-gray-500 flex items-center gap-1">
-                <VideoCameraIcon className="h-3 w-3" />
-                {t("lessons.video_uploaded")}
-              </span>
-            ) : null}
+            <div className="flex items-center gap-2 text-xs text-gray-500">
+              {lesson.videoId ? (
+                <span className="flex items-center gap-1">
+                  <VideoCameraIcon className="h-3 w-3" />
+                  {t("lessons.video_uploaded")}
+                </span>
+              ) : null}
+              {lesson.hasQuiz && lesson.quiz ? (
+                <span className="flex items-center gap-1 text-blue-600">
+                  <AcademicCapIcon className="h-3 w-3" />
+                  Quiz
+                </span>
+              ) : null}
+            </div>
           </div>
         </div>
         <div className="flex items-center gap-2">
@@ -273,6 +286,8 @@ export default function CourseUnitsManagement({ courseId }) {
     videoId: "",
     pdfUrl: [],
   });
+  
+  const [selectedLessonTab, setSelectedLessonTab] = useState("details");
 
   // Fetch course units with proper error handling
   const { data: units = [], isLoading } = api.course.getCourseUnits.useQuery(
@@ -399,6 +414,7 @@ export default function CourseUnitsManagement({ courseId }) {
     setSelectedUnit(null);
     setSelectedLesson(null);
     setIsAddingLesson(false);
+    setSelectedLessonTab("details");
   };
 
   const handleDragEnd = (event) => {
@@ -870,7 +886,7 @@ export default function CourseUnitsManagement({ courseId }) {
         isDismissable={false}
         isOpen={isLessonModalOpen}
         scrollBehavior="inside"
-        size="lg"
+        size="2xl"
         onClose={onLessonModalClose}
       >
         <ModalContent>
@@ -882,7 +898,15 @@ export default function CourseUnitsManagement({ courseId }) {
                   : t("lessons.edit_lesson")}
               </ModalHeader>
               <ModalBody>
-                <div className="flex flex-col gap-4">
+                <Tabs
+                  selectedKey={selectedLessonTab}
+                  onSelectionChange={setSelectedLessonTab}
+                  aria-label="Lesson management tabs"
+                  variant="underlined"
+                >
+                  <Tab key="details" title={t("lessons.lesson_details")}>
+                    <div className="py-4">
+                      <div className="flex flex-col gap-4">
                   <Input
                     isRequired
                     label={t("lessons.title_en")}
@@ -1126,15 +1150,30 @@ export default function CourseUnitsManagement({ courseId }) {
                     )}
                   </div>
 
-                  <Switch
-                    isSelected={formData.isVisible}
-                    onValueChange={(value) =>
-                      setFormData({ ...formData, isVisible: value })
-                    }
-                  >
-                    {t("lessons.visible")}
-                  </Switch>
-                </div>
+                      <Switch
+                        isSelected={formData.isVisible}
+                        onValueChange={(value) =>
+                          setFormData({ ...formData, isVisible: value })
+                        }
+                      >
+                        {t("lessons.visible")}
+                      </Switch>
+                      </div>
+                    </div>
+                  </Tab>
+                  
+                  {/* Quiz Management Tab - Only show for existing lessons with video */}
+                  {!isAddingLesson && selectedLesson && formData.videoId && (
+                    <Tab key="quiz" title={t("lessons.quiz_management")}>
+                      <div className="py-4">
+                        <QuizManagement
+                          lessonId={selectedLesson.id}
+                          existingQuiz={selectedLesson.quiz}
+                        />
+                      </div>
+                    </Tab>
+                  )}
+                </Tabs>
               </ModalBody>
               <ModalFooter>
                 <Button color="default" variant="light" onPress={onClose}>
