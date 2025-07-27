@@ -1235,6 +1235,7 @@ export const courseRouter = createTRPCRouter({
         pageSize: z.number().min(1).default(6),
         studentType: z
           .enum(["UNIVERSITY_STUDENT", "SCHOOL_STUDENT"])
+          .nullable()
           .optional(),
       })
     )
@@ -1488,6 +1489,7 @@ export const courseRouter = createTRPCRouter({
       z.object({
         studentType: z
           .enum(["UNIVERSITY_STUDENT", "SCHOOL_STUDENT"])
+          .nullable()
           .optional(),
       })
     )
@@ -1555,6 +1557,7 @@ export const courseRouter = createTRPCRouter({
       z.object({
         studentType: z
           .enum(["UNIVERSITY_STUDENT", "SCHOOL_STUDENT"])
+          .nullable()
           .optional(),
       })
     )
