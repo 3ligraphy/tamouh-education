@@ -24,7 +24,6 @@
     "@dnd-kit/sortable": "^10.0.0",
     "@dnd-kit/utilities": "^3.2.2",
     "@fingerprintjs/fingerprintjs": "^4.5.1",
-    "@hello-pangea/dnd": "^17.0.0",
     "@heroicons/react": "^2.2.0",
     "@heroui/accordion": "2.2.8",
     "@heroui/avatar": "2.2.7",
