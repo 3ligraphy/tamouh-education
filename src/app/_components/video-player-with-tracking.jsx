@@ -20,7 +20,9 @@ export default function VideoPlayerWithTracking({
   const [completionRate, setCompletionRate] = useState(0);
   const [isCompleted, setIsCompleted] = useState(false);
   const [hasInteracted, setHasInteracted] = useState(false);
+  const [playerReady, setPlayerReady] = useState(false);
   const iframeRef = useRef(null);
+  const playerRef = useRef(null);
   const updateIntervalRef = useRef(null);
   const watchTimeRef = useRef(0);
   const lastUpdateRef = useRef(0);
@@ -58,6 +60,214 @@ export default function VideoPlayerWithTracking({
       console.log("Initialized video completion state:", videoCompletion);
     }
   }, [videoCompletion]);
+
+  // Load Player.js library and initialize player
+  useEffect(() => {
+    const loadPlayerJs = () => {
+      return new Promise((resolve, reject) => {
+        // Check if Player.js is already loaded
+        if (window.playerjs) {
+          resolve(window.playerjs);
+          return;
+        }
+
+        // Load Player.js library
+        const script = document.createElement('script');
+        script.src = '//assets.mediadelivery.net/playerjs/player-0.1.0.min.js';
+        script.type = 'text/javascript';
+        script.onload = () => {
+          console.log('Player.js library loaded successfully');
+          resolve(window.playerjs);
+        };
+        script.onerror = () => {
+          console.error('Failed to load Player.js library');
+          reject(new Error('Failed to load Player.js'));
+        };
+        document.head.appendChild(script);
+      });
+    };
+
+    const initializePlayer = async () => {
+      try {
+        if (!iframeRef.current) return;
+
+        const playerjs = await loadPlayerJs();
+        
+        // Wait a bit for iframe to be fully loaded
+        setTimeout(() => {
+          try {
+            playerRef.current = new playerjs.Player(iframeRef.current);
+            console.log('Player.js instance created');
+            
+            // Set up event listeners using official Player.js API
+            setupPlayerEventListeners();
+          } catch (error) {
+            console.error('Error creating Player.js instance:', error);
+            // Fallback to original postMessage system
+            setupFallbackEventListeners();
+          }
+        }, 1000);
+      } catch (error) {
+        console.error('Error loading Player.js:', error);
+        // Fallback to original postMessage system
+        setupFallbackEventListeners();
+      }
+    };
+
+    initializePlayer();
+
+    return () => {
+      if (playerRef.current) {
+        // Clean up player instance
+        try {
+          playerRef.current.off('ready');
+          playerRef.current.off('play');
+          playerRef.current.off('pause');
+          playerRef.current.off('ended');
+          playerRef.current.off('timeupdate');
+        } catch (error) {
+          console.log('Error cleaning up player events:', error);
+        }
+      }
+    };
+  }, [videoData?.url]);
+
+  // Setup Player.js event listeners
+  const setupPlayerEventListeners = () => {
+    if (!playerRef.current) return;
+
+    console.log('Setting up Player.js event listeners');
+
+    // Player ready event
+    playerRef.current.on('ready', () => {
+      console.log('Player is ready');
+      setPlayerReady(true);
+      setHasInteracted(true);
+      
+      // Get initial duration
+      playerRef.current.getDuration((duration) => {
+        if (duration > 0) {
+          setTotalTime(duration);
+          console.log('Video duration from Player.js:', duration);
+        }
+      });
+    });
+
+    // Play event
+    playerRef.current.on('play', () => {
+      console.log('Video started playing (Player.js)');
+      setIsPlaying(true);
+      setHasInteracted(true);
+      lastUpdateRef.current = Date.now();
+    });
+
+    // Pause event
+    playerRef.current.on('pause', () => {
+      console.log('Video paused (Player.js)');
+      setIsPlaying(false);
+    });
+
+    // Ended event
+    playerRef.current.on('ended', () => {
+      console.log('Video ended (Player.js)');
+      setIsPlaying(false);
+      setHasInteracted(true);
+      
+      // Mark as completed when video ends
+      if (totalTime > 0) {
+        updateVideoCompletion.mutate({
+          lessonId,
+          watchTime: Math.round(totalTime),
+          totalTime: Math.round(totalTime),
+          lastPosition: Math.round(totalTime),
+          completed: true,
+        });
+      }
+    });
+
+    // Time update event - most important for progress tracking
+    playerRef.current.on('timeupdate', (timingData) => {
+      try {
+        // Parse the JSON string to an object as per Bunny CDN documentation
+        const data = JSON.parse(timingData);
+        const currentSeconds = data.seconds;
+        const duration = data.duration;
+        
+        if (currentSeconds !== undefined) {
+          setCurrentTime(currentSeconds);
+        }
+        
+        if (duration && duration > 0 && duration !== totalTime) {
+          setTotalTime(duration);
+        }
+        
+        console.log(`Video timeupdate (Player.js): ${currentSeconds}s / ${duration}s`);
+      } catch (error) {
+        console.error('Error parsing timeupdate data:', error, timingData);
+      }
+    });
+  };
+
+  // Fallback to original postMessage system
+  const setupFallbackEventListeners = () => {
+    console.log('Setting up fallback postMessage event listeners');
+    
+    const handleMessage = (event) => {
+      if (!event.data || typeof event.data !== 'object') return;
+      
+      const data = event.data;
+      console.log("Received video event (fallback):", data);
+      
+      switch (data.event) {
+        case "video-metadata":
+        case "loadedmetadata":
+          if (data.duration) {
+            setTotalTime(data.duration);
+            console.log("Video duration set (fallback):", data.duration);
+          }
+          break;
+        case "video-play":
+        case "play":
+          setIsPlaying(true);
+          setHasInteracted(true);
+          lastUpdateRef.current = Date.now();
+          console.log("Video started playing (fallback)");
+          break;
+        case "video-pause":
+        case "pause":
+          setIsPlaying(false);
+          console.log("Video paused (fallback)");
+          break;
+        case "video-ended":
+        case "ended":
+          setIsPlaying(false);
+          setHasInteracted(true);
+          console.log("Video ended (fallback)");
+          if (totalTime > 0) {
+            updateVideoCompletion.mutate({
+              lessonId,
+              watchTime: Math.round(totalTime),
+              totalTime: Math.round(totalTime),
+              lastPosition: Math.round(totalTime),
+              completed: true,
+            });
+          }
+          break;
+        case "video-timeupdate":
+        case "timeupdate":
+          if (data.currentTime !== undefined) {
+            setCurrentTime(data.currentTime);
+          }
+          break;
+      }
+    };
+
+    window.addEventListener("message", handleMessage);
+    
+    return () => {
+      window.removeEventListener("message", handleMessage);
+    };
+  };
 
   // Enhanced video progress tracking with multiple methods
   useEffect(() => {
@@ -102,104 +312,6 @@ export default function VideoPlayerWithTracking({
       }
     };
   }, [isPlaying, totalTime, lessonId, hasInteracted, isCompleted]);
-
-  // Handle video events via postMessage
-  useEffect(() => {
-    const handleMessage = (event) => {
-      // Accept messages from any video provider
-      if (!event.data || typeof event.data !== 'object') return;
-      
-      const data = event.data;
-      console.log("Received video event:", data);
-      
-      switch (data.event) {
-        case "video-metadata":
-        case "loadedmetadata":
-          if (data.duration) {
-            setTotalTime(data.duration);
-            console.log("Video duration set:", data.duration);
-          }
-          break;
-        case "video-play":
-        case "play":
-          setIsPlaying(true);
-          setHasInteracted(true);
-          lastUpdateRef.current = Date.now();
-          console.log("Video started playing");
-          break;
-        case "video-pause":
-        case "pause":
-          setIsPlaying(false);
-          console.log("Video paused");
-          break;
-        case "video-ended":
-        case "ended":
-          setIsPlaying(false);
-          setHasInteracted(true);
-          console.log("Video ended - marking as completed");
-          // Mark as completed when video ends
-          updateVideoCompletion.mutate({
-            lessonId,
-            watchTime: Math.round(totalTime),
-            totalTime: Math.round(totalTime),
-            lastPosition: Math.round(totalTime),
-            completed: true,
-          });
-          break;
-        case "video-timeupdate":
-        case "timeupdate":
-          if (data.currentTime !== undefined) {
-            setCurrentTime(data.currentTime);
-          }
-          break;
-        case "video-seeking":
-        case "seeking":
-          if (data.currentTime !== undefined) {
-            setCurrentTime(data.currentTime);
-          }
-          break;
-      }
-    };
-
-    window.addEventListener("message", handleMessage);
-    return () => window.removeEventListener("message", handleMessage);
-  }, [lessonId, totalTime]);
-
-  // Fallback: Detect video interaction through iframe clicks
-  useEffect(() => {
-    const handleIframeInteraction = () => {
-      if (!hasInteracted) {
-        setHasInteracted(true);
-        console.log("User interacted with video iframe");
-      }
-    };
-
-    const iframe = iframeRef.current;
-    if (iframe) {
-      iframe.addEventListener('load', () => {
-        // Try to detect video metadata from URL or set reasonable defaults
-        if (!totalTime && videoData?.url) {
-          // If we can't get duration from postMessage, set a default and track based on time
-          console.log("Setting fallback video duration tracking");
-          setTimeout(() => {
-            if (!totalTime) {
-              // Assume a reasonable duration for tracking purposes
-              // This will be updated when we get real data
-              setTotalTime(300); // 5 minutes default
-            }
-          }, 3000);
-        }
-      });
-      
-      iframe.addEventListener('mouseenter', handleIframeInteraction);
-      iframe.addEventListener('click', handleIframeInteraction);
-      
-      return () => {
-        iframe.removeEventListener('mouseenter', handleIframeInteraction);
-        iframe.removeEventListener('click', handleIframeInteraction);
-      };
-    }
-  }, [hasInteracted, totalTime, videoData]);
 
   // Save progress when component unmounts or page unloads
   useEffect(() => {
@@ -264,6 +376,7 @@ export default function VideoPlayerWithTracking({
           <div className="aspect-video bg-black relative">
             <iframe
               ref={iframeRef}
+              id={`bunny-player-${lessonId}`}
               allow="accelerometer;gyroscope;autoplay;encrypted-media;picture-in-picture;"
               allowFullScreen={true}
               loading="lazy"
@@ -289,7 +402,8 @@ export default function VideoPlayerWithTracking({
             {process.env.NODE_ENV === 'development' && (
               <div className="absolute bottom-4 left-4 bg-black/80 text-white p-2 rounded text-xs">
                 Playing: {isPlaying ? 'Yes' : 'No'} | 
-                Interacted: {hasInteracted ? 'Yes' : 'No'} |
+                Ready: {playerReady ? 'Yes' : 'No'} |
+                Player.js: {playerRef.current ? 'Yes' : 'No'} |
                 Progress: {Math.round(completionRate)}%
               </div>
             )}

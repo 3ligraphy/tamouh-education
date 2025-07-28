@@ -750,7 +750,8 @@
     "actions": {
       "view": "View Details",
       "edit": "Edit Account",
-      "delete": "Delete Account"
+      "delete": "Delete Account",
+      "view_certificates": "View Certificates"
     },
     "messages": {
       "account_updated": "Account updated successfully",
@@ -777,6 +778,8 @@
       "instructor_bio_en_required": "English bio is required",
       "instructor_name_ar_required": "Arabic name is required",
       "instructor_name_en_required": "English name is required",
+      "instructor_job_title_ar_required": "Arabic job title is required",
+      "instructor_job_title_en_required": "English job title is required",
       "plan_type_required": "Plan type is required",
       "payment_status_required": "Payment status is required",
       "start_date_required": "Start date is required",
@@ -1100,7 +1103,22 @@
     "languages": {
       "en": "English",
       "ar": "Arabic"
-    }
+    },
+    "student_certificates": "Student Certificates & Completed Courses",
+    "student_information": "Student Information",
+    "completed_courses": "Completed Courses",
+    "issued_certificates": "Issued Certificates",
+    "progress": "Progress",
+    "completed": "Completed",
+    "completed_on": "Completed on",
+    "certified": "Certified",
+    "issued_on": "Issued on",
+    "view": "View",
+    "download": "Download",
+    "certificate_code": "Certificate Code",
+    "no_completed_courses": "No completed courses",
+    "no_certificates_issued": "No certificates issued",
+    "close": "Close"
   },
   "courses-management": {
     "search": "Search courses...",
@@ -1687,16 +1705,6 @@
     "select_student_type": "Select student type",
     "save": "Save",
     "cancel": "Cancel",
-    "confirm_delete": "Are you sure you want to delete this user?",
-    "student_certificates": "Student Certificates & Completed Courses",
-    "student_information": "Student Information",
-    "completed_courses": "Completed Courses",
-    "issued_certificates": "Issued Certificates",
-    "progress": "Progress",
-    "completed": "Completed",
-    "certificate_code": "Certificate Code",
-    "no_completed_courses": "No completed courses",
-    "no_certificates_issued": "No certificates issued",
-    "close": "Close"
+    "confirm_delete": "Are you sure you want to delete this user?"
   }
 }

@@ -1630,13 +1630,13 @@ export default function AccountsManagement() {
                   <CardBody>
                     <div className="grid grid-cols-2 gap-4 text-sm">
                       <div>
-                        <span className="font-medium">{t("name")}:</span> {studentCertData.student.name}
+                        <span className="font-medium">{t("table.name")}:</span> {studentCertData.student.name}
                       </div>
                       <div>
-                        <span className="font-medium">{t("email")}:</span> {studentCertData.student.email}
+                        <span className="font-medium">{t("view_modal.fields.email")}:</span> {studentCertData.student.email}
                       </div>
                       <div>
-                        <span className="font-medium">{t("student_type")}:</span> {studentCertData.student.studentType}
+                        <span className="font-medium">{t("view_modal.fields.student_type")}:</span> {studentCertData.student.studentType}
                       </div>
                       <div>
                         <span className="font-medium">{t("completed_courses")}:</span> {studentCertData.completedCourses.length}
@@ -1655,6 +1655,8 @@ export default function AccountsManagement() {
                       <div className="space-y-3">
                         {studentCertData.completedCourses.map((progress) => {
                           const courseTitle = progress.course.translations.find(
+                            t => t.language === locale
+                          )?.courseTitle || progress.course.translations.find(
                             t => t.language === 'en'
                           )?.courseTitle;
                           const hasCertificate = studentCertData.certificates.some(
@@ -1713,6 +1715,8 @@ export default function AccountsManagement() {
                       <div className="space-y-3">
                         {studentCertData.certificates.map((certificate) => {
                           const courseTitle = certificate.course.translations.find(
+                            t => t.language === locale
+                          )?.courseTitle || certificate.course.translations.find(
                             t => t.language === 'en'
                           )?.courseTitle;
 

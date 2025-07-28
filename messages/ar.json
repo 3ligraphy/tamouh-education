@@ -817,7 +817,8 @@
     "actions": {
       "view": "عرض تفاصيل الحساب",
       "edit": "تعديل الحساب",
-      "delete": "حذف الحساب"
+      "delete": "حذف الحساب",
+      "view_certificates": "عرض الشهادات"
     },
     "messages": {
       "account_updated": "تم تحديث الحساب بنجاح",
@@ -844,6 +845,8 @@
       "instructor_bio_en_required": "السيرة الذاتية بالإنجليزية مطلوبة",
       "instructor_name_ar_required": "الاسم بالعربية مطلوب",
       "instructor_name_en_required": "الاسم بالإنجليزية مطلوب",
+      "instructor_job_title_ar_required": "المسمى الوظيفي بالعربية مطلوب",
+      "instructor_job_title_en_required": "المسمى الوظيفي بالإنجليزية مطلوب",
       "plan_type_required": "نوع الخطة مطلوب",
       "payment_status_required": "حالة الدفع مطلوبة",
       "start_date_required": "تاريخ البداية مطلوب",
@@ -1170,7 +1173,22 @@
     "languages": {
       "en": "الإنجليزية",
       "ar": "العربية"
-    }
+    },
+    "student_certificates": "شهادات الطالب والدورات المكتملة",
+    "student_information": "معلومات الطالب",
+    "completed_courses": "الدورات المكتملة",
+    "issued_certificates": "الشهادات الصادرة",
+    "progress": "التقدم",
+    "completed": "مكتمل",
+    "completed_on": "مكتملة في",
+    "certified": "معتمد",
+    "issued_on": "صدرت في",
+    "view": "عرض",
+    "download": "تحميل",
+    "certificate_code": "رمز الشهادة",
+    "no_completed_courses": "لا توجد دورات مكتملة",
+    "no_certificates_issued": "لم يتم إصدار شهادات",
+    "close": "إغلاق"
   },
   "courses-management": {
     "search": "البحث في الدورات...",
@@ -1748,16 +1766,6 @@
     "select_student_type": "اختر نوع الطالب",
     "save": "حفظ",
     "cancel": "إلغاء",
-    "confirm_delete": "هل أنت متأكد من أنك تريد حذف هذا المستخدم؟",
-    "student_certificates": "شهادات الطالب والدورات المكتملة",
-    "student_information": "معلومات الطالب",
-    "completed_courses": "الدورات المكتملة",
-    "issued_certificates": "الشهادات الصادرة",
-    "progress": "التقدم",
-    "completed": "مكتمل",
-    "certificate_code": "رمز الشهادة",
-    "no_completed_courses": "لا توجد دورات مكتملة",
-    "no_certificates_issued": "لم يتم إصدار شهادات",
-    "close": "إغلاق"
+    "confirm_delete": "هل أنت متأكد من أنك تريد حذف هذا المستخدم؟"
   }
 }
